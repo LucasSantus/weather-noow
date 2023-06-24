@@ -4,6 +4,7 @@ import { Providers } from "@/contexts/providers";
 import clsx from "clsx";
 import { Metadata } from "next";
 import "./globals.css";
+import { NoScript } from "./no-script";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={clsx("h-screen bg-slate-800 dark:bg-[#101014]", fontSans.variable)}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <NoScript />
+          {children}
+        </Providers>
       </body>
     </html>
   );
