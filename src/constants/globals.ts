@@ -1,5 +1,5 @@
 export const QUERY_KEYS = {
-  profiles: "profiles",
+  cities: "cities",
 };
 
 export const ROUTES = {

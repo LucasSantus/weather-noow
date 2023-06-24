@@ -1,11 +1,8 @@
-import { CitiesQueryResponse } from "@/hooks/api/useCities";
 import type { RawAxiosRequestConfig } from "axios";
-import { api } from ".";
+import { api } from "../axios";
 
 export class CityAPI {
-  static async getAll(options?: RawAxiosRequestConfig): Promise<CitiesQueryResponse> {
-    return await api
-      .get<CitiesQueryResponse>("geo/1.0/direct", options)
-      .then((response) => response.data ?? ([] as CitiesQueryResponse));
+  static async getAll<T>(options?: RawAxiosRequestConfig): Promise<T> {
+    return await api.get<T>("geo/1.0/direct", options).then((response) => response.data ?? ([] as T));
   }
 }

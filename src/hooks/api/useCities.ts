@@ -14,9 +14,9 @@ export type CitiesQueryResponse = CityData[];
 
 export function useCities(city: string, options?: UseQueryOptions<CitiesQueryResponse>) {
   return useQuery<CitiesQueryResponse>(
-    [QUERY_KEYS.profiles],
+    [QUERY_KEYS.cities, city],
     ({ signal }) => {
-      return CityAPI.getAll({
+      return CityAPI.getAll<CitiesQueryResponse>({
         signal,
         params: {
           q: city,

@@ -1,5 +1,5 @@
 import type { RawAxiosRequestConfig } from "axios";
-import { api } from ".";
+import { api } from "../axios";
 
 export class WeatherAPI {
   static async get<T>(options?: RawAxiosRequestConfig): Promise<T> {
