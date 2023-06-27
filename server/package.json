@@ -1,0 +1,28 @@
+{
+  "name": "fastify-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "prettier": "prettier --check src",
+    "prettier:fix": "prettier --write src",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "Lucas Eduardo de Oliveira Santos",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fastify": "^4.17.0",
+    "tsx": "^3.12.7"
+  },
+  "devDependencies": {
+    "@fastify/cors": "^8.2.1",
+    "@types/node": "^20.1.5",
+    "axios": "^1.4.0",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4",
+    "zod": "^3.21.4"
+  }
+}
