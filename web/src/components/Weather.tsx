@@ -1,5 +1,5 @@
 import { CityData } from "@/hooks/api/useCities";
-import { useWeathers } from "@/hooks/api/useWeathers";
+import { useWeathers } from "@/hooks/api/useWeather";
 import { FC } from "react";
 
 interface WeatherProps {
@@ -15,15 +15,21 @@ export const Weather: FC<WeatherProps> = ({ city }) => {
     },
   });
 
-  console.log(weathers, isLoading);
+  if (isLoading || !weathers) return null;
+
+  console.log({ weathers });
 
   return (
     <div className="border border-b-2">
-      <p>Nome: {city.name}</p>
-      <p>País: {city.country}</p>
-      <p>Estado: {city.state}</p>
-      <p>Latitude: {city.lat}</p>
-      <p>Longitude: {city.lon}</p>
+      {weathers.list.map(({ main, dt_txt }, index) => {
+        return (
+          <div key={index}>
+            <div>{dt_txt}</div>
+            <div>{main.temp_max}</div>
+            <div>{main.temp_min}</div>
+          </div>
+        );
+      })}
     </div>
   );
 };

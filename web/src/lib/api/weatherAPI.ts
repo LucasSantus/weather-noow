@@ -1,4 +1,4 @@
-import { WeathersQueryResponse } from "@/hooks/api/useWeathers";
+import { WeathersQueryResponse } from "@/hooks/api/useWeather";
 import type { RawAxiosRequestConfig } from "axios";
 import { api } from "../axios";
 

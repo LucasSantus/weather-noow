@@ -42,7 +42,6 @@ export interface WeatherData {
     };
     dt_txt: string;
   }>;
-
   city: {
     id: number;
     name: string;
@@ -58,7 +57,7 @@ export interface WeatherData {
   };
 }
 
-export type WeathersQueryResponse = Array<WeatherData>;
+export type WeathersQueryResponse = WeatherData;
 
 interface WeatherQueryOptions extends UseQueryOptions<WeathersQueryResponse> {
   params: {
