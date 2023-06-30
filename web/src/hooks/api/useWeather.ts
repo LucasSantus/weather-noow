@@ -57,9 +57,9 @@ export interface WeatherData {
   };
 }
 
-export type WeathersQueryResponse = WeatherData;
+export type WeatherQueryResponse = WeatherData;
 
-interface WeatherQueryOptions extends UseQueryOptions<WeathersQueryResponse> {
+interface WeatherQueryOptions extends UseQueryOptions<WeatherQueryResponse> {
   params: {
     latitude: number;
     longitude: number;
@@ -70,7 +70,7 @@ interface WeatherQueryOptions extends UseQueryOptions<WeathersQueryResponse> {
 export function useWeathers(options: WeatherQueryOptions) {
   const { latitude, longitude, count } = options.params;
 
-  return useQuery<WeathersQueryResponse>(
+  return useQuery<WeatherQueryResponse>(
     [QUERY_KEYS.weathers, latitude, longitude, count],
     ({ signal }) => {
       return WeatherAPI.getWeathers({

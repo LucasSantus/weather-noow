@@ -1,21 +1,22 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { CityAPI } from "../api/city";
+import { WeatherAPI } from "../api/weather";
 
-export async function citiesRoutes(app: FastifyInstance) {
-  app.get("/cities", async (request: FastifyRequest, reply: FastifyReply) => {
+export async function weatherRoutes(app: FastifyInstance) {
+  app.get("/weather/one-call", async (request: FastifyRequest, reply: FastifyReply) => {
     const bodySchema = z.object({
-      city: z.string(),
-      limit: z.coerce.number().nullish(),
+      latitude: z.coerce.number(),
+      longitude: z.coerce.number(),
     });
 
-    const { city, limit = 5 } = bodySchema.parse(request.query);
+    const { latitude, longitude } = bodySchema.parse(request.query);
 
     try {
-      const { data, status } = await CityAPI.getCities({
+      const { data, status } = await WeatherAPI.getOneCall({
         params: {
-          q: city,
-          limit,
+          lat: latitude,
+          lon: longitude,
+          exclude: "minutely, hourly",
           appid: process.env.WEATHER_API_ID,
         },
       });

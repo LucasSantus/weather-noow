@@ -3,7 +3,7 @@ import "dotenv/config";
 import cors from "@fastify/cors";
 import fastify from "fastify";
 import { citiesRoutes } from "./routes/cities";
-import { weatherRoutes } from "./routes/weathers";
+import { weatherRoutes } from "./routes/weather";
 
 export const app = fastify();
 

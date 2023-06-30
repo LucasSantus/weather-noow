@@ -1,7 +1,8 @@
-import type { RawAxiosRequestConfig } from "axios";
-import { api } from "../axios";
+import { QUERY_KEYS } from "@/constants/globals";
+import { WeatherAPI } from "@/lib/api/weatherAPI";
+import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 
-export interface WeatherData {
+export interface WeatherOneCallData {
   cod: string;
   message: number;
   cnt: number;
@@ -24,7 +25,7 @@ export interface WeatherData {
         main: string;
         description: string;
         icon: string;
-      },
+      }
     ];
     clouds: {
       all: number;
@@ -41,7 +42,6 @@ export interface WeatherData {
     };
     dt_txt: string;
   }>;
-
   city: {
     id: number;
     name: string;
@@ -57,12 +57,29 @@ export interface WeatherData {
   };
 }
 
-export type WeathersQueryResponse = Array<WeatherData>;
+export type WeatherOneCallQueryResponse = WeatherOneCallData;
 
-export class WeatherAPI {
-  static async getWeather(options: RawAxiosRequestConfig): Promise<WeathersQueryResponse> {
-    return await api
-      .get<WeathersQueryResponse>("data/2.5/forecast", options)
-      .then((response) => response.data ?? ([] as WeathersQueryResponse));
-  }
+interface WeatherQueryOptions
+  extends UseQueryOptions<WeatherOneCallQueryResponse> {
+  params: {
+    latitude: number;
+    longitude: number;
+  };
+}
+
+export function useWeatherOneCall(options: WeatherQueryOptions) {
+  const { latitude, longitude } = options.params;
+
+  return useQuery<WeatherOneCallQueryResponse>(
+    [QUERY_KEYS.weathers, latitude, longitude],
+    ({ signal }) => {
+      return WeatherAPI.getWeathers({
+        signal,
+        params: {
+          ...options.params,
+        },
+      });
+    },
+    options
+  );
 }

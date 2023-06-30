@@ -8,6 +8,6 @@ export class CityAPI {
   ): Promise<CitiesQueryResponse> {
     return await api
       .get<CitiesQueryResponse>("/cities", options)
-      .then((response) => response.data ?? ([] as CitiesQueryResponse));
+      .then((response) => response.data ?? []);
   }
 }
