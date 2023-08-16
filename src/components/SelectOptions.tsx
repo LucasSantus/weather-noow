@@ -11,8 +11,6 @@ export function SelectOptions({}: SelectOptionsProps): JSX.Element {
   const { push } = useRouter();
   const { cities, setSelectedCity } = useCityContext();
 
-  // if (cities) if (cities.length === 0) return <div className="">Nenhuma cidade encontrada</div>;
-
   function onHandleSelect(city: City) {
     setSelectedCity(city);
 
@@ -24,7 +22,7 @@ export function SelectOptions({}: SelectOptionsProps): JSX.Element {
       {cities?.map((city) => (
         <div
           key={city.lat + city.lon}
-          className="bg-gray-600 hover:bg-gray-500 cursor-pointer hover:text-gray-200 text-gray-100 px-5 py-4 rounded select-text w-full"
+          className="bg-foreground/10 hover:bg-foreground/20 border border-foreground/30 text-foreground cursor-pointer px-5 py-4 rounded select-text w-full"
           onClick={() => onHandleSelect(city)}
         >
           {city.name} - {city.country} - {city?.state}

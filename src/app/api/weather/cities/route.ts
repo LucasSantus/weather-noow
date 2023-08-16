@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
   const city = request.nextUrl.searchParams.get("city");
 
   if (!city) {
-    return NextResponse.json({ message: "Missing city param" }, { status: 400 });
+    return NextResponse.json({ message: "Insira a cidade para fazer a busca" }, { status: 400 });
   }
 
   const params = {

@@ -1,15 +1,21 @@
 import { SearchForm } from "@/components/SearchForm";
 import { SelectOptions } from "@/components/SelectOptions";
+import { ToggleMode } from "@/components/ToggleMode";
+import { WeatherLayout } from "@/components/WeatherLayout";
 
 export default function Home() {
   return (
-    <div className="flex h-full select-none">
-      <div className="bg-slate-900 flex justify-center items-center w-full">
-        <div className="w-[500px] flex flex-col gap-2">
+    <WeatherLayout>
+      <div className="flex justify-center">
+        <div className="mt-10">
           <SearchForm />
           <SelectOptions />
         </div>
       </div>
-    </div>
+
+      <div className="fixed top-5 right-5">
+        <ToggleMode />
+      </div>
+    </WeatherLayout>
   );
 }
