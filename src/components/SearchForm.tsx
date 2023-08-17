@@ -52,7 +52,7 @@ export function SearchForm({}: SearchFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onHandleSubmit)} className="grid grid-cols-6 gap-4">
+      <form onSubmit={handleSubmit(onHandleSubmit)} className="grid grid-cols-6 gap-4 w-full">
         <div className="col-span-5">
           <FormField
             control={control}
