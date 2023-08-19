@@ -10,7 +10,6 @@ import { z } from "zod";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
-import { useToast } from "./ui/use-toast";
 
 interface SearchFormProps {}
 
@@ -22,7 +21,6 @@ export type SearchFormData = z.infer<typeof searchFormSchema>;
 
 export function SearchForm({}: SearchFormProps) {
   const { setCities } = useCityContext();
-  const { toast } = useToast();
 
   const form = useForm<SearchFormData>({
     resolver: zodResolver(searchFormSchema),
@@ -42,17 +40,15 @@ export function SearchForm({}: SearchFormProps) {
       .get<CitiesQueryResponse>("/api/weather/cities", { params })
       .then((response) => response ?? []);
 
-    toast({
-      title: "Uh oh! Something went wrong.",
-      description: "There was a problem with your request.",
-    });
-
     setCities(data ?? []);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onHandleSubmit)} className="grid grid-cols-6 gap-4 w-full">
+      <form
+        onSubmit={handleSubmit(onHandleSubmit)}
+        className="grid w-full grid-cols-6 gap-4"
+      >
         <div className="col-span-5">
           <FormField
             control={control}
@@ -60,7 +56,7 @@ export function SearchForm({}: SearchFormProps) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Pesquisar..." {...field} />
+                  <Input placeholder="Buscar local..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

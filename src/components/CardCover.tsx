@@ -1,7 +1,25 @@
+import { cn } from "@/utils/cn";
 import { PropsWithChildren } from "react";
 
-export function CardCover({ children }: PropsWithChildren) {
+interface CardCoverProps extends PropsWithChildren {
+  title?: string;
+  className?: string;
+}
+
+export function CardCover({ children, title, className }: CardCoverProps) {
   return (
-    <div className="bg-custom-gray-800 h-full rounded-lg p-4 w-full flex flex-col gap-4 justify-center">{children}</div>
+    <div
+      className={cn(
+        "flex h-full w-full flex-col gap-4 rounded-lg bg-custom-gray-700 p-5",
+        className,
+      )}
+    >
+      {title && (
+        <span className="text-base font-medium text-custom-gray-400">
+          {title}
+        </span>
+      )}
+      {children}
+    </div>
   );
 }

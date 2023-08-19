@@ -1,7 +1,8 @@
 import { CardCover } from "@/components/CardCover";
-import { SearchForm } from "@/components/SearchForm";
 import { WeatherLayout } from "@/components/WeatherLayout";
 import { WeatherDetails } from "./components/WeatherDetails";
+import { WeatherDetailsToDay } from "./components/WeatherDetailsToDay";
+import { WeatherDetailsToDaysForecast } from "./components/WeatherDetailsToDaysForecast";
 
 interface WeatherProps {
   params: {
@@ -12,13 +13,18 @@ interface WeatherProps {
 export default function Weather({ params }: WeatherProps) {
   return (
     <WeatherLayout>
-      <div className="grid grid-cols-2 p-5 flex-1 gap-5 h-full">
+      <div className="grid h-full flex-1 grid-cols-2 gap-4 p-5">
         <CardCover>
-          <SearchForm />
-
-          <WeatherDetails cityName={params.cityName} />
+          <WeatherDetails />
         </CardCover>
-        <CardCover></CardCover>
+        <div className="grid-rows-10 grid gap-4">
+          <CardCover title="Detalhes do clima hoje" className="row-span-6">
+            <WeatherDetailsToDay />
+          </CardCover>
+          <CardCover title="Detalhes do clima hoje" className="row-span-4">
+            <WeatherDetailsToDaysForecast />
+          </CardCover>
+        </div>
       </div>
     </WeatherLayout>
   );
