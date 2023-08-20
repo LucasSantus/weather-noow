@@ -4,13 +4,21 @@ import { WeatherDetails } from "./components/WeatherDetails";
 import { WeatherDetailsToDay } from "./components/WeatherDetailsToDay";
 import { WeatherDetailsToDaysForecast } from "./components/WeatherDetailsToDaysForecast";
 
-interface WeatherProps {
-  params: {
-    cityName: string;
-  };
+interface WeatherProps {}
+
+async function getData() {
+  const res = await fetch(
+    "http://localhost:3000/api/weather/cities?city=Sao Bento Abade",
+  );
+
+  return res.json();
 }
 
-export default function Weather({ params }: WeatherProps) {
+export default async function Weather({}: WeatherProps) {
+  const data = await getData();
+
+  console.log(data);
+
   return (
     <WeatherLayout>
       <div className="grid h-full flex-1 grid-cols-2 gap-4 p-5">
