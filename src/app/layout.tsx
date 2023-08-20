@@ -1,9 +1,13 @@
 import { ClientProviders } from "@/contexts/ClientProviders";
 import { ServerProviders } from "@/contexts/ServerProviders";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { NoScript } from "./no-script";
+
+dayjs.locale("pt-br");
 
 const nunito = Nunito({
   subsets: ["latin"],

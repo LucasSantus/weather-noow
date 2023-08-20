@@ -14,7 +14,7 @@ export function SelectOptions({}: SelectOptionsProps): JSX.Element {
   function onHandleSelect(city: City) {
     setSelectedCity(city);
 
-    push(`/weather/${city.lat}/${city.lon}`);
+    push(`/weather/${city.name}, ${city.state}, ${city.country}`);
   }
 
   return (
