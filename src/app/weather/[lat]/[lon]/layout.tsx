@@ -1,4 +1,3 @@
-import { CardCover } from "@/components/CardCover";
 import { WeatherLayout } from "@/components/WeatherLayout";
 import { ReactNode } from "react";
 
@@ -6,25 +5,20 @@ interface WeatherLayoutProps {
   children: ReactNode;
   detail: ReactNode;
   forecasts: ReactNode;
-  weatherdetail: ReactNode;
 }
 
 export default function Layout({
+  children,
   detail,
   forecasts,
-  weatherdetail,
 }: WeatherLayoutProps) {
   return (
     <WeatherLayout>
       <div className="grid h-full flex-1 grid-cols-2 gap-4 p-5">
-        <CardCover>{detail}</CardCover>
+        {children}
         <div className="grid-rows-10 grid gap-4">
-          <CardCover title="Detalhes do clima hoje" className="row-span-6">
-            {weatherdetail}
-          </CardCover>
-          <CardCover title="Detalhes do clima hoje" className="row-span-4">
-            {forecasts}
-          </CardCover>
+          {detail}
+          {forecasts}
         </div>
       </div>
     </WeatherLayout>
