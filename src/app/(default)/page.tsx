@@ -13,7 +13,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="fixed top-5 right-5">
+      <div className="fixed right-5 top-5">
         <ToggleMode />
       </div>
     </WeatherLayout>

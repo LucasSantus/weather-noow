@@ -17,12 +17,14 @@ export function SelectOptions({}: SelectOptionsProps): JSX.Element {
     push("/weather");
   }
 
+  console.log(cities);
+
   return (
     <Fragment>
       {cities?.map((city) => (
         <div
           key={city.lat + city.lon}
-          className="bg-foreground/10 hover:bg-foreground/20 border border-foreground/30 text-foreground cursor-pointer px-5 py-4 rounded select-text w-full"
+          className="bg-foreground/10 hover:bg-foreground/20 border-foreground/30 text-foreground w-full cursor-pointer select-text rounded border px-5 py-4"
           onClick={() => onHandleSelect(city)}
         >
           {city.name} - {city.country} - {city?.state}

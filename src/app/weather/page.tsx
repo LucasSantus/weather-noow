@@ -17,8 +17,6 @@ async function getData() {
 export default async function Weather({}: WeatherProps) {
   const data = await getData();
 
-  console.log(data);
-
   return (
     <WeatherLayout>
       <div className="grid h-full flex-1 grid-cols-2 gap-4 p-5">
