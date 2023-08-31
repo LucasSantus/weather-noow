@@ -1,4 +1,4 @@
-import { WeatherLayout } from "@/components/WeatherLayout";
+import { WeatherLayout } from "@/components/weather-layout";
 import { ReactNode } from "react";
 
 interface WeatherLayoutProps {

@@ -1,8 +1,10 @@
+import { Header } from "@/layout/header";
 import { PropsWithChildren } from "react";
 
 export function WeatherLayout({ children }: PropsWithChildren) {
   return (
-    <div className="h-screen w-screen text-white dark:bg-custom-gray-800">
+    <div className="dark:bg-custom-gray-800 h-screen w-screen p-3 text-white">
+      <Header />
       {children}
     </div>
   );

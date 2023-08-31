@@ -1,7 +1,4 @@
-import { CardCover } from "@/components/CardCover";
-import { CurrentClock } from "@/components/CurrentClock";
-import dayjs from "dayjs";
-import { Check } from "lucide-react";
+import { CardCover } from "@/components/card-cover";
 
 interface WeatherProps {
   params: {
@@ -40,23 +37,24 @@ interface Weather {
   cod: number;
 }
 
-async function getData({ params }: WeatherProps): Promise<Weather> {
-  const response = await fetch(
-    `http://localhost:3000/api/weather/detail?city=${params.city}`,
-  );
+// async function getData({ params }: WeatherProps): Promise<Weather> {
+//   const response = await fetch(
+//     `http://localhost:3000/api/weather/detail?city=${params.city}`,
+//   );
 
-  return response.json();
-}
+//   return response.json();
+// }
 
 export default async function Weather({ params }: WeatherProps) {
-  const data = await getData({ params });
+  // const data = await getData({ params });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <CardCover>
-      <div className="relative flex flex-1 rounded-lg bg-custom-gray-700">
-        <div className="flex flex-1 justify-between p-10">
+      <div className="bg-custom-gray-700 relative flex flex-1 rounded-lg">
+        weather
+        {/* <div className="flex flex-1 justify-between p-10">
           <div className="flex flex-col">
             <span className="text-xl font-bold">{data.name}</span>
             <span className="text-lg capitalize">
@@ -85,7 +83,7 @@ export default async function Weather({ params }: WeatherProps) {
 
             <Check size={140} />
           </div>
-        </div>
+        </div> */}
       </div>
     </CardCover>
   );

@@ -1,4 +1,4 @@
-import { CardCover } from "@/components/CardCover";
+import { CardCover } from "@/components/card-cover";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // TODO: melhorar o tamanho dos skeletons deixando-os responsivos sem interferir no layout

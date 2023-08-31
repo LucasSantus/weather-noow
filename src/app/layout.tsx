@@ -1,11 +1,12 @@
-import { ClientProviders } from "@/contexts/ClientProviders";
-import { ServerProviders } from "@/contexts/ServerProviders";
+import { Toaster } from "@/components/ui/toaster";
+import "@/styles/globals.css";
+import "@/styles/styles.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import "./globals.css";
 import { NoScript } from "./no-script";
+import { Providers } from "./providers";
 
 dayjs.locale("pt-br");
 
@@ -28,12 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={nunito.variable}>
       <body>
-        <ServerProviders>
-          <ClientProviders>
-            <NoScript />
-            {children}
-          </ClientProviders>
-        </ServerProviders>
+        <Providers>
+          <NoScript />
+          <Toaster />
+          {children}
+        </Providers>
       </body>
     </html>
   );
