@@ -25,6 +25,12 @@ export async function POST(request: Request) {
     );
   }
 
+  const myPromise = await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Hello, world!");
+    }, 2000);
+  });
+
   // const params = {
   //   q: city,
   //   language: "pt-br",
@@ -57,14 +63,6 @@ export async function POST(request: Request) {
       countryName: "Brasil",
     },
   ];
-
-  // const params = {
-  //   q: city,
-  //   limit: 10,
-  //   appid: process.env.NEXT_PUBLIC_API_OPEN_WEATHER_MAP_KEY,
-  // };
-
-  // const { data } = await axios.get("http://api.openweathermap.org/geo/1.0/direct", { params });
 
   return NextResponse.json(response);
 }

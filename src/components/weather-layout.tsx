@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 
 export function WeatherLayout({ children }: PropsWithChildren) {
   return (
-    <div className="dark:bg-custom-gray-800 h-screen w-screen p-3 text-white">
+    <div className="dark:bg-custom-gray-800 h-screen w-screen p-3">
       <Header />
       {children}
     </div>

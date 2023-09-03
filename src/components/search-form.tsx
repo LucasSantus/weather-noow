@@ -8,17 +8,19 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
+import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Search } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Framing } from "./framing";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
-import { Separator } from "./ui/separator";
 import { Skeleton } from "./ui/skeleton";
 
 interface SearchFormProps {}
@@ -39,6 +41,8 @@ interface City {
 }
 
 export function SearchForm({}: SearchFormProps) {
+  const { push } = useRouter();
+
   const form = useForm<SearchFormData>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
@@ -64,23 +68,17 @@ export function SearchForm({}: SearchFormProps) {
 
   function onSubmit(data: SearchFormData) {
     refetch();
-
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
   }
 
   return (
     <div className="w-full">
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-          <div className="grid gap-3">
-            <div className="flex w-full flex-1 gap-3">
+          <div className="grid gap-2">
+            <Framing
+              {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
+              className="grid gap-2 sm:flex"
+            >
               <FormField
                 control={control}
                 name="search"
@@ -88,8 +86,8 @@ export function SearchForm({}: SearchFormProps) {
                   <FormItem>
                     <FormControl>
                       <Input
-                        placeholder="Insira a Cidade"
-                        className="w-[500px]"
+                        placeholder="Pesquisar..."
+                        className="w-full flex-auto xs:w-[300px] md:w-[500px]"
                         {...field}
                       />
                     </FormControl>
@@ -98,35 +96,48 @@ export function SearchForm({}: SearchFormProps) {
                 )}
               />
 
-              <Button type="submit" className="h-13 w-13 max-h-14">
-                <Search />
-              </Button>
-            </div>
+              <Button
+                type="submit"
+                className="h-14 sm:w-14"
+                icon={<Search />}
+                isLoading={isFetching}
+                disabled={isFetching}
+              />
+            </Framing>
 
             {isFetching ? (
-              <Skeleton className="h-20 w-full" />
+              <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border p-4">
+                <Skeleton className="h-10" />
+              </ScrollArea>
             ) : (
               <Fragment>
                 {cities.length > 0 && (
-                  <ScrollArea className="h-max-60 h-full w-full rounded-md border">
-                    <div className="w-full p-4">
+                  <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border p-4">
+                    <div className="grid w-full gap-3">
                       {cities.map(
                         (
                           { locationKey, cityName, stateName, countryName },
                           index,
-                        ) => (
-                          <Fragment key={locationKey}>
-                            <Link
-                              href={"/weather/" + locationKey}
-                              className="w-full bg-slate-950"
+                        ) => {
+                          const time = index * 0.1;
+
+                          return (
+                            <Framing
+                              key={locationKey}
+                              {...bounceAnimationHorizontalDislocate({
+                                delay: 1.4 * time,
+                              })}
                             >
-                              {cityName}, {stateName}, {countryName}
-                            </Link>
-                            {index < cities.length - 1 && (
-                              <Separator className="my-2" />
-                            )}
-                          </Fragment>
-                        ),
+                              <Button
+                                className="flex w-full items-start justify-start"
+                                onClick={() => push("/weather/" + locationKey)}
+                                variant="outline"
+                              >
+                                {cityName}, {stateName}, {countryName}
+                              </Button>
+                            </Framing>
+                          );
+                        },
                       )}
                     </div>
                   </ScrollArea>

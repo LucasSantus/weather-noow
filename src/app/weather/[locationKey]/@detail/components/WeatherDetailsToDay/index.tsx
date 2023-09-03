@@ -1,3 +1,7 @@
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import {
   CloudRainWind,
   Droplet,
@@ -7,11 +11,27 @@ import {
 } from "lucide-react";
 import { WeatherDetailsToDayInfo } from "./WeatherDetailsToDayInfo";
 
-interface WeatherDetailsToDayProps {}
+interface WeatherDetailsToDayProps {
+  locationKey: string;
+}
 
-export function WeatherDetailsToDay({}: WeatherDetailsToDayProps) {
+export function WeatherDetailsToDay({ locationKey }: WeatherDetailsToDayProps) {
+  const { data: cities = [], isFetching } = useQuery({
+    queryKey: ["detail"],
+    queryFn: async () => {
+      return axios
+        .get("/api/weather/detail", {
+          params: {
+            locationKey,
+          },
+        })
+        .then(({ data }) => data);
+    },
+    enabled: false,
+  });
+
   return (
-    <div className="grid h-full items-center divide-y divide-custom-gray-600">
+    <div className="divide-custom-gray-600 grid h-full items-center divide-y">
       <WeatherDetailsToDayInfo
         icon={Thermometer}
         title="Sensação térmica"
