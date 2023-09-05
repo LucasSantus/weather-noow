@@ -14,9 +14,9 @@ export default function Layout({
 }: WeatherLayoutProps) {
   return (
     <WeatherLayout>
-      <div className="grid h-full flex-1 grid-cols-2 gap-4 p-5">
+      <div className="grid grid-cols-2">
         {children}
-        <div className="grid-rows-10 grid gap-4">
+        <div className="grid-rows-10 grid">
           {detail}
           {forecasts}
         </div>

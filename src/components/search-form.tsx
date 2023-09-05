@@ -66,7 +66,7 @@ export function SearchForm({}: SearchFormProps) {
     enabled: false,
   });
 
-  function onSubmit(data: SearchFormData) {
+  function onSubmit() {
     refetch();
   }
 
@@ -107,7 +107,10 @@ export function SearchForm({}: SearchFormProps) {
 
             {isFetching ? (
               <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border p-4">
-                <Skeleton className="h-10" />
+                <div className="grid w-full gap-3">
+                  <Skeleton className="h-10" />
+                  <Skeleton className="h-10" />
+                </div>
               </ScrollArea>
             ) : (
               <Fragment>

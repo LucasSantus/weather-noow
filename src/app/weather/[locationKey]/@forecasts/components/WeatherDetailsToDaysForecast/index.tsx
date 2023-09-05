@@ -1,9 +1,13 @@
 import { Check } from "lucide-react";
 import { WeatherDetailsToDaysForecastDay } from "./WeatherDetailsToDaysForecastDay";
 
-interface WeatherDetailsToDaysForecastProps {}
+interface WeatherDetailsToDaysForecastProps {
+  locationKey: string;
+}
 
-export function WeatherDetailsToDaysForecast({}: WeatherDetailsToDaysForecastProps) {
+export function WeatherDetailsToDaysForecast({
+  locationKey,
+}: WeatherDetailsToDaysForecastProps) {
   return (
     <div className="grid h-full grid-cols-5 text-center">
       <WeatherDetailsToDaysForecastDay
