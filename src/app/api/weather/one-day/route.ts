@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  const { params: url } = await request.json();
-
-  const { locationKey } = url;
-
-  console.log({ locationKey });
+export async function GET(request: Request) {
+  const { locationKey } = await request.json();
 
   if (!locationKey) {
     return NextResponse.json(

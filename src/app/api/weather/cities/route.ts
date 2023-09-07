@@ -3,17 +3,17 @@ import { NextResponse } from "next/server";
 import { RequestCitiesResponse } from "./types";
 
 export async function POST(request: Request) {
-  const { city } = await request.json();
+  const { search } = await request.json();
 
-  if (!city) {
+  if (!search) {
     return NextResponse.json(
-      { message: "Insira o campo [city] para fazer a busca" },
+      { message: "Insira o campo [search] para fazer a busca" },
       { status: 400 },
     );
   }
 
   const params = {
-    q: city,
+    q: search,
     language: "pt-br",
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
   };
