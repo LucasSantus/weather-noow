@@ -13,7 +13,7 @@ export function bounceAnimationHorizontalDislocate({
   transition = TRANSITION_DURATION,
 }: StructureAnimation): Variants {
   return {
-    initial: { x: 100, opacity: 0 },
+    initial: { x: -100, opacity: 0 },
     animate: {
       x: 0,
       opacity: 1,
@@ -25,6 +25,6 @@ export function bounceAnimationHorizontalDislocate({
         delay: transition * delay,
       },
     },
-    exit: { x: 100, opacity: 0 },
+    exit: { x: -100, opacity: 0 },
   };
 }

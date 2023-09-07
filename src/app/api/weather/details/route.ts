@@ -1,32 +1,57 @@
-import { NextResponse } from "next/server";
+import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
+import { RequestCurrentResponse } from "./types/current";
+import { RequestDetailsReturnResponse } from "./types/return";
 
-export async function POST(request: Request) {
-  const { locationKey } = await request.json();
+export async function GET(request: NextRequest) {
+  const locationKey = request.nextUrl.searchParams.get("locationKey");
 
-  // if (!locationKey) {
-  //   return NextResponse.json(
-  //     { message: "Insira o campo [locationKey] para fazer a busca" },
-  //     { status: 400 },
-  //   );
-  // }
+  if (!locationKey) {
+    return NextResponse.json(
+      {
+        message:
+          "Insira o parâmetro [locationKey] para fazer a busca dos dados",
+      },
+      { status: 400 },
+    );
+  }
 
-  // const params = {
-  //   apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
-  //   language: "pt-br",
-  //   metric: true,
-  // };
+  return NextResponse.json({
+    humidity: 42,
+    uvIndex: 5,
+    windSpeed: 22.0,
+    thermalSensation: 25.1,
+    visibility: 16.1,
+  });
 
-  // const { data } = await axios.get<RequestResponse>(
-  //   "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + locationKey,
-  //   { params },
-  // );
+  const params = {
+    apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
+    language: "pt-br",
+    metric: true,
+    details: true,
+  };
 
-  // const response = data.map((item) => ({
-  //   locationKey: item.Key,
-  //   cityName: item.LocalizedName,
-  //   stateName: item.AdministrativeArea.LocalizedName,
-  //   countryName: item.Country.LocalizedName,
-  // }));
+  try {
+    const { data } = await axios.get<RequestCurrentResponse>(
+      "http://dataservice.accuweather.com/currentconditions/v1/" + locationKey,
+      {
+        params,
+      },
+    );
 
-  return NextResponse.json({});
+    const response: RequestDetailsReturnResponse = {
+      humidity: data[0].RelativeHumidity,
+      uvIndex: data[0].UVIndex,
+      windSpeed: data[0].WindGust.Speed.Metric.Value,
+      thermalSensation: data[0].RealFeelTemperature.Metric.Value,
+      visibility: data[0].Visibility.Metric.Value,
+    };
+
+    return NextResponse.json(response);
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Erro ao fazer as requisições" },
+      { status: 500 },
+    );
+  }
 }

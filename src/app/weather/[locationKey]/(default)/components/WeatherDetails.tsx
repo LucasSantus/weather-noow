@@ -1,65 +1,56 @@
 "use client";
 
+import { RequestOneDayReturnResponse } from "@/app/api/weather/one-day/types/return";
+import { CardCoverLoading } from "@/components/card-cover-loading";
 import { CurrentClock } from "@/components/current-clock";
+import WeatherAPI from "@/lib/api/weather";
+import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { Check } from "lucide-react";
 
 interface WeatherDetailsProps {
+  oneDay: RequestOneDayReturnResponse;
   locationKey: string;
 }
 
-export function WeatherDetails({ locationKey }: WeatherDetailsProps) {
-  // const { data: oneDay, isFetching } = useQuery({
-  //   queryKey: ["weather", locationKey],
-  //   queryFn: () => {
-  //     return axios
-  //       .get("/api/weather/one", {
-  //         params: {
-  //           locationKey,
-  //         },
-  //       })
-  //       .then(({ data }) => data);
-  //   },
-  // });
+export function WeatherDetails({ oneDay, locationKey }: WeatherDetailsProps) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["one-day"],
+    queryFn: () => WeatherAPI.getOneDay({ locationKey }),
+    initialData: oneDay,
+  });
 
-  // if (isFetching) {
-  //   return (
-  //     <div className="bg-custom-gray-700 relative flex flex-1 rounded-lg">
-  //       <Skeleton className="h-full" />
-  //     </div>
-  //   );
-  // }
+  if (isLoading) return <CardCoverLoading />;
 
   return (
-    <div className="bg-custom-gray-700 relative flex flex-1 rounded-lg">
-      <div className="flex flex-1 justify-between p-10">
-        <div className="flex flex-col">
-          {/* <span className="text-xl font-bold">{oneDay?.cityName}</span> */}
+    <div className="flex h-full flex-col justify-between rounded-lg p-4">
+      <div className="flex justify-between">
+        <div className="grid">
+          <span className="text-xl font-bold">
+            {data.cityName}, {data.uf}
+          </span>
           <span className="text-lg capitalize">
             {dayjs().format("dddd, D [de] MMMM [de] YYYY")}
           </span>
         </div>
 
-        <div>
-          <span className="text-xl font-semibold">
-            <CurrentClock />
+        <span className="text-2xl font-semibold">
+          <CurrentClock />
+        </span>
+      </div>
+
+      <div className="flex justify-between">
+        <div className="grid">
+          <span className="text-9xl font-bold">
+            {Math.floor(data.tempCurrent)}ºc
+          </span>
+          <span className="text-xl">
+            {Math.floor(data.tempMin)}ºc / {Math.floor(data.tempMax)}ºc -{" "}
+            {data.weatherText}
           </span>
         </div>
-      </div>
-      <div className="absolute bottom-10 left-10 right-10">
-        <div className="flex justify-between">
-          {/* <div className="flex flex-col">
-            <span className="text-9xl font-bold">
-              {Math.floor(oneDay?.tempMin)}ºc
-            </span>
-            <span className="text-xl">
-              {Math.floor(oneDay?.tempMin)}ºc / {Math.floor(oneDay?.tempMax)}ºc
-              - Poucas nuvens
-            </span>
-          </div> */}
 
-          <Check size={140} />
-        </div>
+        <Check size={140} />
       </div>
     </div>
   );

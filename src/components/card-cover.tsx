@@ -1,16 +1,28 @@
 import { cn } from "@/lib/utils";
+import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
+import { StructureAnimation } from "@/utils/animation/types";
 import { PropsWithChildren } from "react";
+import { Framing } from "./framing";
 
 interface CardCoverProps extends PropsWithChildren {
   title?: string;
   className?: string;
+  animation: StructureAnimation;
 }
 
-export function CardCover({ children, title, className }: CardCoverProps) {
+export function CardCover({
+  children,
+  title,
+  className,
+  animation,
+}: CardCoverProps) {
   return (
-    <div
+    <Framing
+      {...bounceAnimationVerticalDislocate({
+        ...animation,
+      })}
       className={cn(
-        "bg-custom-gray-700 flex h-full w-full flex-col gap-4 rounded-lg p-5",
+        "bg-custom-gray-700 h-full gap-4 rounded-lg border p-5",
         className,
       )}
     >
@@ -20,6 +32,6 @@ export function CardCover({ children, title, className }: CardCoverProps) {
         </span>
       )}
       {children}
-    </div>
+    </Framing>
   );
 }

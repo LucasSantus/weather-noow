@@ -13,13 +13,15 @@ export default function Layout({
   forecasts,
 }: WeatherLayoutProps) {
   return (
-    <WeatherLayout>
-      <div className="grid grid-cols-2">
+    <WeatherLayout
+      header={{
+        className: "!bg-custom-gray-700",
+      }}
+    >
+      <div className="grid h-full grid-flow-col grid-cols-2 grid-rows-2 gap-4">
         {children}
-        <div className="grid-rows-10 grid">
-          {detail}
-          {forecasts}
-        </div>
+        {detail}
+        {forecasts}
       </div>
     </WeatherLayout>
   );

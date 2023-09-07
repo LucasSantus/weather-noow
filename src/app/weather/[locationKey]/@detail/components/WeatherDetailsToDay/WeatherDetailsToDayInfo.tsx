@@ -1,24 +1,32 @@
+import { Framing } from "@/components/framing";
+import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
+import { StructureAnimation } from "@/utils/animation/types";
 import { LucideIcon } from "lucide-react";
 
 interface WeatherDetailsToDayInfoProps {
   icon: LucideIcon;
   title: string;
   content: string;
+  animation: StructureAnimation;
 }
 
 export function WeatherDetailsToDayInfo({
   icon: Icon,
   title,
   content,
+  animation,
 }: WeatherDetailsToDayInfoProps) {
   return (
-    <div className="flex h-full w-full items-center justify-between">
+    <Framing
+      {...bounceAnimationHorizontalDislocate({ ...animation })}
+      className="flex h-full w-full items-center justify-between"
+    >
       <div className="flex items-center justify-start gap-5">
-        <Icon className="h-9 w-9 stroke-custom-gray-500" />
-        <span className="text-md font-bold text-custom-gray-200">{title}</span>
+        <Icon className="stroke-custom-gray-500 h-9 w-9" />
+        <span className="text-md text-custom-gray-200 font-bold">{title}</span>
       </div>
 
-      <span className="text-2xl font-bold text-custom-gray-200">{content}</span>
-    </div>
+      <span className="text-custom-gray-200 text-2xl font-bold">{content}</span>
+    </Framing>
   );
 }
