@@ -1,5 +1,5 @@
+import { RequestForecastReturnResponse } from "@/app/api/weather/forecast/types/return";
 import { CardCover } from "@/components/card-cover";
-import WeatherAPI from "@/lib/api/weather";
 import { WeatherDetailsToDaysForecast } from "./components/WeatherDetailsToDaysForecast";
 
 interface ForecastsProps {
@@ -8,10 +8,20 @@ interface ForecastsProps {
   };
 }
 
+async function getData({ locationKey }: { locationKey: string }) {
+  return await fetch(
+    "http://localhost:3000/api/weather/forecast?locationKey=" + locationKey,
+    {
+      method: "GET",
+    },
+  ).then(
+    async (response) =>
+      (await response.json()) as RequestForecastReturnResponse,
+  );
+}
+
 export default async function Forecasts({ params }: ForecastsProps) {
-  const forecasts = await WeatherAPI.getForecasts({
-    locationKey: params.locationKey,
-  });
+  const data = await getData({ locationKey: params.locationKey });
 
   return (
     <CardCover
@@ -19,10 +29,7 @@ export default async function Forecasts({ params }: ForecastsProps) {
       className="col-span-1 row-span-1"
       animation={{ delay: 0.8 }}
     >
-      <WeatherDetailsToDaysForecast
-        forecasts={forecasts}
-        locationKey={params.locationKey}
-      />
+      <WeatherDetailsToDaysForecast data={data} />
     </CardCover>
   );
 }

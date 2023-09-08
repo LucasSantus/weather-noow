@@ -16,12 +16,18 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  return NextResponse.json({
-    humidity: 42,
-    uvIndex: 5,
-    windSpeed: 22.0,
-    thermalSensation: 25.1,
-    visibility: 16.1,
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        NextResponse.json({
+          humidity: 42,
+          uvIndex: 5,
+          windSpeed: 22.0,
+          thermalSensation: 25.1,
+          visibility: 16.1,
+        }),
+      );
+    }, 3000);
   });
 
   const params = {

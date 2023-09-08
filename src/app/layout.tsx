@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={nunito.variable}>
-      <body className="h-screen">
+      <body className="h-screen dark:bg-custom-gray-800">
         <Providers>
           <NoScript />
           <Toaster />

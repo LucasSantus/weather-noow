@@ -22,12 +22,12 @@ export function CardCover({
         ...animation,
       })}
       className={cn(
-        "bg-custom-gray-700 h-full gap-4 rounded-lg border p-5",
+        "h-full gap-4 rounded-lg border bg-custom-gray-700 p-5",
         className,
       )}
     >
       {title && (
-        <span className="text-custom-gray-400 text-base font-medium">
+        <span className="text-base font-medium text-custom-gray-400">
           {title}
         </span>
       )}

@@ -21,20 +21,20 @@ export function WeatherDetailsToDaysForecastDay({
   return (
     <Framing
       {...bounceAnimationVerticalDislocate({ ...animation })}
-      className="flex h-full flex-col justify-evenly p-8"
+      className="flex h-full w-full flex-col justify-evenly rounded-lg border"
     >
-      <span className="text-custom-gray-200 text-lg font-bold capitalize">
+      <span className="text-lg font-bold capitalize text-custom-gray-200">
         {day}
       </span>
 
       <Icon className="flex w-full items-center justify-center" size={90} />
 
       <div className="grid gap-2">
-        <div className="flex justify-center gap-4">
-          <span className="text-custom-gray-100 text-lg font-bold">
+        <div className="flex flex-col justify-center gap-4 md:flex-row">
+          <span className="text-lg font-bold text-custom-gray-100">
             {minTemperature} ºc
           </span>
-          <span className="text-custom-gray-400 text-lg font-bold">
+          <span className="text-lg font-bold text-custom-gray-400">
             {maxTemperature} ºc
           </span>
         </div>

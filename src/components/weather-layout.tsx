@@ -10,7 +10,7 @@ interface WeatherLayoutProps extends PropsWithChildren {
 
 export function WeatherLayout({ children, header }: WeatherLayoutProps) {
   return (
-    <div className="dark:bg-custom-gray-800 flex h-full flex-col gap-3 p-3">
+    <div className="flex h-full flex-col gap-3 p-3">
       <Header
         isBackButton={header?.isBackButton ?? true}
         className={header?.className}

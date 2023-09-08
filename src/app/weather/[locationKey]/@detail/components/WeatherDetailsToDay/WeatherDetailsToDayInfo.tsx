@@ -19,14 +19,14 @@ export function WeatherDetailsToDayInfo({
   return (
     <Framing
       {...bounceAnimationHorizontalDislocate({ ...animation })}
-      className="flex h-full w-full items-center justify-between"
+      className="flex h-full w-full flex-col items-center justify-center py-4 xs:flex-row xs:justify-between sm:py-2"
     >
       <div className="flex items-center justify-start gap-5">
-        <Icon className="stroke-custom-gray-500 h-9 w-9" />
-        <span className="text-md text-custom-gray-200 font-bold">{title}</span>
+        <Icon className="h-9 w-9 stroke-custom-gray-500" />
+        <span className="text-md font-bold text-custom-gray-200">{title}</span>
       </div>
 
-      <span className="text-custom-gray-200 text-2xl font-bold">{content}</span>
+      <span className="text-2xl font-bold text-custom-gray-200">{content}</span>
     </Framing>
   );
 }

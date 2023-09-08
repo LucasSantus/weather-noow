@@ -1,31 +1,16 @@
 "use client";
 
 import { RequestDetailsReturnResponse } from "@/app/api/weather/details/types/return";
-import { CardCoverLoading } from "@/components/card-cover-loading";
-import WeatherAPI from "@/lib/api/weather";
-import { useQuery } from "@tanstack/react-query";
 import { Droplet, Eye, SunMedium, Thermometer, Wind } from "lucide-react";
 import { WeatherDetailsToDayInfo } from "./WeatherDetailsToDayInfo";
 
 interface WeatherDetailsToDayProps {
-  details: RequestDetailsReturnResponse;
-  locationKey: string;
+  data: RequestDetailsReturnResponse;
 }
 
-export function WeatherDetailsToDay({
-  details,
-  locationKey,
-}: WeatherDetailsToDayProps) {
-  const { data, isLoading } = useQuery({
-    queryKey: ["details"],
-    queryFn: async () => WeatherAPI.getDetails({ locationKey }),
-    initialData: details,
-  });
-
-  if (isLoading) return <CardCoverLoading />;
-
+export function WeatherDetailsToDay({ data }: WeatherDetailsToDayProps) {
   return (
-    <div className="divide-custom-gray-600 grid h-full items-center divide-y">
+    <div className="grid h-full items-center divide-y divide-custom-gray-600">
       <WeatherDetailsToDayInfo
         icon={Thermometer}
         title="Sensação térmica"

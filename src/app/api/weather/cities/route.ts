@@ -19,26 +19,25 @@ export async function POST(request: Request) {
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
   };
 
-  try {
-    const { data } = await axios.get<RequestCitiesResponse>(
-      "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
-      { params },
-    );
+  const { data } = await axios.get<RequestCitiesResponse>(
+    "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
+    { params },
+  );
 
-    const response: RequestCitiesReturnResponse = data.map(
-      ({ Key, LocalizedName, AdministrativeArea, Country }) => ({
-        locationKey: Key,
-        cityName: LocalizedName,
-        stateName: AdministrativeArea.LocalizedName,
-        countryName: Country.LocalizedName,
-      }),
-    );
+  const response: RequestCitiesReturnResponse = data.map(
+    ({ Key, LocalizedName, AdministrativeArea, Country }) => ({
+      locationKey: Key,
+      cityName: LocalizedName,
+      stateName: AdministrativeArea.LocalizedName,
+      countryName: Country.LocalizedName,
+    }),
+  );
 
-    return NextResponse.json(response);
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Erro ao fazer as requisições" },
-      { status: 500 },
-    );
-  }
+  return NextResponse.json(response);
+  // } catch (error) {
+  //   return NextResponse.json(
+  //     { message: "Erro ao fazer as requisições" + error },
+  //     { status: 500 },
+  //   );
+  // }
 }
