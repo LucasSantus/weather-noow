@@ -1,31 +1,36 @@
+import { Framing } from "@/components/framing";
+import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
+import { StructureAnimation } from "@/utils/animation/types";
 import { LucideIcon } from "lucide-react";
 
 interface WeatherDetailsToDaysForecastDayProps {
   day: string;
   icon: LucideIcon;
-  weatherDescription: string;
   maxTemperature: number;
   minTemperature: number;
+  animation: StructureAnimation;
 }
 
 export function WeatherDetailsToDaysForecastDay({
   day,
   icon: Icon,
-  weatherDescription,
   maxTemperature,
   minTemperature,
+  animation,
 }: WeatherDetailsToDaysForecastDayProps) {
   return (
-    <div className="flex h-full flex-col justify-evenly p-8">
-      <span className="text-lg font-bold text-custom-gray-200">{day}</span>
+    <Framing
+      {...bounceAnimationVerticalDislocate({ ...animation })}
+      className="flex h-full w-full flex-col justify-evenly rounded-lg border"
+    >
+      <span className="text-lg font-bold capitalize text-custom-gray-200">
+        {day}
+      </span>
 
       <Icon className="flex w-full items-center justify-center" size={90} />
 
       <div className="grid gap-2">
-        <span className="text-md font-normal text-custom-gray-200">
-          {weatherDescription}
-        </span>
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col justify-center gap-4 md:flex-row">
           <span className="text-lg font-bold text-custom-gray-100">
             {minTemperature} ºc
           </span>
@@ -34,6 +39,6 @@ export function WeatherDetailsToDaysForecastDay({
           </span>
         </div>
       </div>
-    </div>
+    </Framing>
   );
 }

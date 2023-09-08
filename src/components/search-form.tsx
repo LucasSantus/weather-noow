@@ -11,8 +11,7 @@ import {
 import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
 import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Fragment } from "react";
@@ -50,24 +49,23 @@ export function SearchForm({}: SearchFormProps) {
     },
   });
 
-  const { watch, handleSubmit, control } = form;
+  const { handleSubmit, control } = form;
 
   const {
     data: cities = [],
-    isFetching,
-    refetch,
-  } = useQuery({
-    queryKey: ["city"],
-    queryFn: async () => {
-      return axios
-        .post<City[]>("/api/weather/cities", { city: watch("search") })
-        .then(({ data }) => data);
+    isLoading,
+    mutate,
+  } = useMutation({
+    mutationFn: (values: SearchFormData) => {
+      return fetch("/api/weather/cities", {
+        method: "POST",
+        body: JSON.stringify(values),
+      }).then(async (response) => (await response.json()) as City[]);
     },
-    enabled: false,
   });
 
-  function onSubmit() {
-    refetch();
+  async function onSubmit({ search }: SearchFormData) {
+    mutate({ search });
   }
 
   return (
@@ -100,12 +98,13 @@ export function SearchForm({}: SearchFormProps) {
                 type="submit"
                 className="h-14 sm:w-14"
                 icon={<Search />}
-                isLoading={isFetching}
-                disabled={isFetching}
+                isLoading={isLoading}
+                disabled={isLoading}
+                aria-label="Search for a city"
               />
             </Framing>
 
-            {isFetching ? (
+            {isLoading ? (
               <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border p-4">
                 <div className="grid w-full gap-3">
                   <Skeleton className="h-10" />
@@ -124,6 +123,8 @@ export function SearchForm({}: SearchFormProps) {
                         ) => {
                           const time = index * 0.1;
 
+                          const cityDescription = `${cityName}, ${stateName}, ${countryName}`;
+
                           return (
                             <Framing
                               key={locationKey}
@@ -135,8 +136,9 @@ export function SearchForm({}: SearchFormProps) {
                                 className="flex w-full items-start justify-start"
                                 onClick={() => push("/weather/" + locationKey)}
                                 variant="outline"
+                                aria-label={cityDescription}
                               >
-                                {cityName}, {stateName}, {countryName}
+                                {cityDescription}
                               </Button>
                             </Framing>
                           );

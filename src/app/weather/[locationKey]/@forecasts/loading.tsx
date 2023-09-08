@@ -1,22 +1,16 @@
-import { CardCover } from "@/components/card-cover";
+import { CardCoverLoading } from "@/components/card-cover-loading";
 import { Skeleton } from "@/components/ui/skeleton";
-
-// TODO: melhorar o tamanho dos skeletons deixando-os responsivos sem interferir no layout
 
 export default async function Loading() {
   return (
-    <CardCover className="row-span-4">
-      <div className="grid h-full grid-flow-row gap-4">
-        <Skeleton className="row-span-1" />
-        <div className="row-span-3 flex h-full space-x-4">
-          <Skeleton className="flex-1" />
-          <Skeleton className="flex-1" />
-          <Skeleton className="flex-1" />
-          <Skeleton className="flex-1" />
-          <Skeleton className="flex-1" />
-          <Skeleton className="flex-1" />
-        </div>
+    <CardCoverLoading className="col-span-1 row-span-1 flex flex-col gap-4">
+      <Skeleton className="h-12 w-full" />
+      <div className="grid h-full w-full grid-cols-4 gap-4">
+        <Skeleton className="w-full" />
+        <Skeleton className="w-full" />
+        <Skeleton className="w-full" />
+        <Skeleton className="w-full" />
       </div>
-    </CardCover>
+    </CardCoverLoading>
   );
 }

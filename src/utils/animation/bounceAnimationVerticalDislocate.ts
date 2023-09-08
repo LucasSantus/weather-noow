@@ -19,7 +19,7 @@ export function bounceAnimationVerticalDislocate({
       opacity: 1,
       transition: {
         type: "spring",
-        stiffness: 120,
+        stiffness: 50,
         damping: 5,
         duration: transition,
         delay: transition * delay,

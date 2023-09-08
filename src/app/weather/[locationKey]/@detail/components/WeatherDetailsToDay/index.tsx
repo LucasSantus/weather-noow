@@ -1,58 +1,56 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import {
-  CloudRainWind,
-  Droplet,
-  SunMedium,
-  Thermometer,
-  Wind,
-} from "lucide-react";
+import { RequestDetailsReturnResponse } from "@/app/api/weather/details/types/return";
+import { Droplet, Eye, SunMedium, Thermometer, Wind } from "lucide-react";
 import { WeatherDetailsToDayInfo } from "./WeatherDetailsToDayInfo";
 
 interface WeatherDetailsToDayProps {
-  locationKey: string;
+  data: RequestDetailsReturnResponse;
 }
 
-export function WeatherDetailsToDay({ locationKey }: WeatherDetailsToDayProps) {
-  const { data: cities = [], isFetching } = useQuery({
-    queryKey: ["detail"],
-    queryFn: async () => {
-      return axios
-        .get("/api/weather/detail", {
-          params: {
-            locationKey,
-          },
-        })
-        .then(({ data }) => data);
-    },
-    enabled: false,
-  });
-
+export function WeatherDetailsToDay({ data }: WeatherDetailsToDayProps) {
   return (
-    <div className="divide-custom-gray-600 grid h-full items-center divide-y">
+    <div className="grid h-full items-center divide-y divide-custom-gray-600">
       <WeatherDetailsToDayInfo
         icon={Thermometer}
         title="Sensação térmica"
-        content="26ºc"
+        content={`${data.thermalSensation.toFixed(0)} ºc`}
+        animation={{
+          delay: 0.6,
+        }}
       />
       <WeatherDetailsToDayInfo
-        icon={CloudRainWind}
-        title="Probabilidade de chuva"
-        content="0%"
+        icon={Eye}
+        title="Visibilidade"
+        content={`${data.visibility.toFixed(0)} km`}
+        animation={{
+          delay: 0.8,
+        }}
       />
       <WeatherDetailsToDayInfo
         icon={Wind}
         title="Velocidade do vento"
-        content="8 km/h"
+        content={`${data.windSpeed.toFixed(0)} km/h`}
+        animation={{
+          delay: 1,
+        }}
       />
       <WeatherDetailsToDayInfo
         icon={Droplet}
         title="Umidade do ar"
-        content="40%"
+        content={`${data.humidity} %`}
+        animation={{
+          delay: 1.2,
+        }}
       />
-      <WeatherDetailsToDayInfo icon={SunMedium} title="Índice UV" content="5" />
+      <WeatherDetailsToDayInfo
+        icon={SunMedium}
+        title="Índice UV"
+        content={`${data.uvIndex}`}
+        animation={{
+          delay: 1.4,
+        }}
+      />
     </div>
   );
 }

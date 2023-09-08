@@ -1,19 +1,20 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-import { RequestCitiesResponse } from "./types";
+import { RequestCitiesResponse } from "./types/cities";
+import { RequestCitiesReturnResponse } from "./types/return";
 
 export async function POST(request: Request) {
-  const { city } = await request.json();
+  const { search } = await request.json();
 
-  if (!city) {
+  if (!search) {
     return NextResponse.json(
-      { message: "Insira o campo [city] para fazer a busca" },
+      { message: "Insira o campo [search] para fazer a busca" },
       { status: 400 },
     );
   }
 
   const params = {
-    q: city,
+    q: search,
     language: "pt-br",
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
   };
@@ -23,7 +24,7 @@ export async function POST(request: Request) {
     { params },
   );
 
-  const response = data.map(
+  const response: RequestCitiesReturnResponse = data.map(
     ({ Key, LocalizedName, AdministrativeArea, Country }) => ({
       locationKey: Key,
       cityName: LocalizedName,
@@ -33,4 +34,10 @@ export async function POST(request: Request) {
   );
 
   return NextResponse.json(response);
+  // } catch (error) {
+  //   return NextResponse.json(
+  //     { message: "Erro ao fazer as requisições" + error },
+  //     { status: 500 },
+  //   );
+  // }
 }
