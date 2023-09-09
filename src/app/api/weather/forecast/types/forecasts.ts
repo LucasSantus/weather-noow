@@ -11,6 +11,11 @@ interface RequestForecastData {
     };
     Day: {
       Icon: number;
+      IconPhrase: string;
+    };
+    Night: {
+      Icon: number;
+      IconPhrase: string;
     };
   }>;
 }

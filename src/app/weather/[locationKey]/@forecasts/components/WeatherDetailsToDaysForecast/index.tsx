@@ -38,6 +38,29 @@ export function WeatherDetailsToDaysForecast({
     }
   };
 
+  function timeToShow(data: {
+    day: {
+      description: string;
+      weatherIcon: number;
+    };
+    night: {
+      description: string;
+      weatherIcon: number;
+    };
+  }) {
+    const currentTime = dayjs().hour();
+    const isDay = currentTime >= 6 && currentTime <= 18;
+    const isNight = currentTime >= 18 && currentTime <= 6;
+
+    if (isDay) {
+      return data.day;
+    }
+
+    if (isNight) {
+      return data.night;
+    }
+  }
+
   return (
     <div
       className="flex h-full w-full flex-nowrap gap-4 overflow-x-auto py-4 pb-8 text-center"
@@ -47,8 +70,12 @@ export function WeatherDetailsToDaysForecast({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseUp}
     >
-      {data.map(({ date, tempMax, tempMin }, index) => {
+      {data.map((forecast, index) => {
+        const { date, tempMax, tempMin } = forecast;
+
         const textToDate = index === 0 ? "Amanhâ" : dayjs(date).format("ddd");
+
+        const currentTime = timeToShow(forecast);
 
         const delay = TRANSITION_DURATION * (index + 1);
 
@@ -57,6 +84,7 @@ export function WeatherDetailsToDaysForecast({
             key={date}
             day={textToDate}
             icon={CloudLightning}
+            description={currentTime?.description ?? ""}
             maxTemperature={Number(tempMax.toFixed(0))}
             minTemperature={Number(tempMin.toFixed(0))}
             animation={{
