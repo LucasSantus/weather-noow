@@ -73,6 +73,22 @@ export function SearchForm({}: SearchFormProps) {
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="grid gap-2">
+            <div className="text-center">
+              <Framing
+                {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
+                className="text-3xl"
+              >
+                <span className="text-custom-gray-100">Boas vindas ao </span>
+                <span className="text-custom-blue-light-100">Weather Now</span>
+              </Framing>
+
+              <Framing
+                {...bounceAnimationVerticalDislocate({ delay: 0.6 })}
+                className="text-xl text-custom-gray-200"
+              >
+                Escolha um local para ver a previsão do tempo
+              </Framing>
+            </div>
             <Framing
               {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
               className="grid gap-2 sm:flex"
