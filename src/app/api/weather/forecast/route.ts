@@ -16,38 +16,38 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        NextResponse.json([
-          {
-            date: "2023-09-08T07:00:00-03:00",
-            tempMin: 13.2,
-            tempMax: 28.5,
-            weatherIcon: 3,
-          },
-          {
-            date: "2023-09-09T07:00:00-03:00",
-            tempMin: 12.7,
-            tempMax: 30.1,
-            weatherIcon: 6,
-          },
-          {
-            date: "2023-09-10T07:00:00-03:00",
-            tempMin: 13.4,
-            tempMax: 30.2,
-            weatherIcon: 4,
-          },
-          {
-            date: "2023-09-11T07:00:00-03:00",
-            tempMin: 13,
-            tempMax: 30.5,
-            weatherIcon: 1,
-          },
-        ]),
-      );
-    }, 3000);
-  });
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve(
+  //       NextResponse.json([
+  //         {
+  //           date: "2023-09-08T07:00:00-03:00",
+  //           tempMin: 13.2,
+  //           tempMax: 28.5,
+  //           weatherIcon: 3,
+  //         },
+  //         {
+  //           date: "2023-09-09T07:00:00-03:00",
+  //           tempMin: 12.7,
+  //           tempMax: 30.1,
+  //           weatherIcon: 6,
+  //         },
+  //         {
+  //           date: "2023-09-10T07:00:00-03:00",
+  //           tempMin: 13.4,
+  //           tempMax: 30.2,
+  //           weatherIcon: 4,
+  //         },
+  //         {
+  //           date: "2023-09-11T07:00:00-03:00",
+  //           tempMin: 13,
+  //           tempMax: 30.5,
+  //           weatherIcon: 1,
+  //         },
+  //       ]),
+  //     );
+  //   }, 3000);
+  // });
 
   const params = {
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
@@ -67,11 +67,18 @@ export async function GET(request: NextRequest) {
 
     const response: RequestForecastReturnResponse = data.DailyForecasts.filter(
       (_, index) => index !== 0,
-    ).map(({ Date, Temperature, Day }) => ({
+    ).map(({ Date, Temperature, Day, Night }) => ({
       date: Date,
       tempMin: Temperature.Minimum.Value,
       tempMax: Temperature.Maximum.Value,
-      weatherIcon: Day.Icon,
+      day: {
+        description: Day.IconPhrase,
+        weatherIcon: Day.Icon,
+      },
+      night: {
+        description: Night.IconPhrase,
+        weatherIcon: Night.Icon,
+      },
     }));
 
     return NextResponse.json(response);

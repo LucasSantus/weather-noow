@@ -1,9 +1,17 @@
 "use client";
 
-import { HTMLMotionProps, motion } from "framer-motion";
+import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion";
 
-interface FramingProps extends HTMLMotionProps<"div"> {}
+interface FramingProps extends HTMLMotionProps<"div"> {
+  presence?: boolean;
+}
 
-export function Framing({ children, ...rest }: FramingProps) {
-  return <motion.div {...rest}>{children}</motion.div>;
+export function Framing({ children, presence = true, ...rest }: FramingProps) {
+  if (!presence) return <motion.div {...rest}>{children}</motion.div>;
+
+  return (
+    <AnimatePresence>
+      <motion.div {...rest}>{children}</motion.div>
+    </AnimatePresence>
+  );
 }

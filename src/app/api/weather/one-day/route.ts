@@ -18,23 +18,23 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        NextResponse.json({
-          cityName: "Três Corações",
-          state: "Minas Gerais",
-          uf: "MG",
-          countryName: "Brasil",
-          tempCurrent: 23.9,
-          weatherText: "Nublado",
-          weatherIcon: 7,
-          tempMin: 13.9,
-          tempMax: 27.2,
-        }),
-      );
-    }, 3000);
-  });
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve(
+  //       NextResponse.json({
+  //         cityName: "Três Corações",
+  //         state: "Minas Gerais",
+  //         uf: "MG",
+  //         countryName: "Brasil",
+  //         tempCurrent: 23.9,
+  //         weatherText: "Nublado",
+  //         weatherIcon: 7,
+  //         tempMin: 13.9,
+  //         tempMax: 27.2,
+  //       }),
+  //     );
+  //   }, 3000);
+  // });
 
   const params = {
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,

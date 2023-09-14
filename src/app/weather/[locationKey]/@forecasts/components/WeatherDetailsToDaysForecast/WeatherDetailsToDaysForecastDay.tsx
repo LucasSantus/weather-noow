@@ -8,6 +8,7 @@ interface WeatherDetailsToDaysForecastDayProps {
   icon: LucideIcon;
   maxTemperature: number;
   minTemperature: number;
+  description: string;
   animation: StructureAnimation;
 }
 
@@ -16,6 +17,7 @@ export function WeatherDetailsToDaysForecastDay({
   icon: Icon,
   maxTemperature,
   minTemperature,
+  description,
   animation,
 }: WeatherDetailsToDaysForecastDayProps) {
   return (
@@ -27,7 +29,14 @@ export function WeatherDetailsToDaysForecastDay({
         {day}
       </span>
 
-      <Icon className="flex w-full items-center justify-center" size={90} />
+      <Icon
+        className="flex w-full items-center justify-center stroke-1"
+        size={90}
+      />
+
+      <span className="text-sm font-medium text-custom-gray-200">
+        {description}
+      </span>
 
       <div className="grid gap-2">
         <div className="flex flex-col justify-center gap-4 md:flex-row">
