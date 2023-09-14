@@ -1,9 +1,9 @@
 import { RequestOneDayReturnResponse } from "@/app/api/weather/one-day/types/return";
 import { CurrentClock } from "@/components/current-clock";
+import { convertNumberToIcon } from "@/utils/convertNumberToIcon";
 import { formatImagePerHour } from "@/utils/formatImagePerHour";
 import dayjs from "dayjs";
 
-import { Check } from "lucide-react";
 import Image from "next/image";
 
 interface WeatherDetailsProps {
@@ -11,6 +11,8 @@ interface WeatherDetailsProps {
 }
 
 export function WeatherDetails({ data }: WeatherDetailsProps) {
+  const Icon = convertNumberToIcon(data.weatherIcon);
+
   return (
     <div className="relative h-full w-full">
       <div className="absolute inset-0">
@@ -58,7 +60,7 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
           </div>
 
           <div>
-            <Check size={140} />
+            <Icon size={160} className="stroke-1" />
           </div>
         </div>
       </div>

@@ -29,7 +29,10 @@ export function WeatherDetailsToDaysForecastDay({
         {day}
       </span>
 
-      <Icon className="flex w-full items-center justify-center" size={90} />
+      <Icon
+        className="flex w-full items-center justify-center stroke-1"
+        size={90}
+      />
 
       <span className="text-sm font-medium text-custom-gray-200">
         {description}

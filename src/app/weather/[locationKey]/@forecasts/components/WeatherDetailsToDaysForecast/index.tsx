@@ -2,8 +2,8 @@
 
 import { RequestForecastReturnResponse } from "@/app/api/weather/forecast/types/return";
 import { TRANSITION_DURATION } from "@/constants/globals";
+import { convertNumberToIcon } from "@/utils/convertNumberToIcon";
 import dayjs from "dayjs";
-import { CloudLightning } from "lucide-react";
 import { useRef, useState } from "react";
 import { WeatherDetailsToDaysForecastDay } from "./WeatherDetailsToDaysForecastDay";
 
@@ -50,15 +50,12 @@ export function WeatherDetailsToDaysForecast({
   }) {
     const currentTime = dayjs().hour();
     const isDay = currentTime >= 6 && currentTime <= 18;
-    const isNight = currentTime >= 18 && currentTime <= 6;
 
     if (isDay) {
       return data.day;
     }
 
-    if (isNight) {
-      return data.night;
-    }
+    return data.night;
   }
 
   return (
@@ -74,16 +71,14 @@ export function WeatherDetailsToDaysForecast({
         const { date, tempMax, tempMin } = forecast;
 
         const textToDate = index === 0 ? "Amanhâ" : dayjs(date).format("ddd");
-
         const currentTime = timeToShow(forecast);
-
         const delay = TRANSITION_DURATION * (index + 1);
 
         return (
           <WeatherDetailsToDaysForecastDay
             key={date}
             day={textToDate}
-            icon={CloudLightning}
+            icon={convertNumberToIcon(currentTime?.weatherIcon ?? 0)}
             description={currentTime?.description ?? ""}
             maxTemperature={Number(tempMax.toFixed(0))}
             minTemperature={Number(tempMin.toFixed(0))}
