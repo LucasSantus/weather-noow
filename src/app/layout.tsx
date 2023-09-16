@@ -16,8 +16,8 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Weather Now",
-  description: "Weather Now is a weather app that shows the current weather.",
+  title: "Weather Noow",
+  description: "Weather Noow is a weather app that shows the current weather.",
 };
 
 export default function RootLayout({
