@@ -1,6 +1,6 @@
 import { RequestOneDayReturnResponse } from "@/app/api/weather/one-day/types/return";
 import { CardCover } from "@/components/card-cover";
-import { WeatherDetails } from "./components/WeatherDetails";
+import { WeatherDetails } from "./components/weather-details";
 
 interface WeatherProps {
   params: {

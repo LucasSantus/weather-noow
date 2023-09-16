@@ -5,7 +5,7 @@ import { TRANSITION_DURATION } from "@/constants/globals";
 import { convertNumberToIcon } from "@/utils/convertNumberToIcon";
 import dayjs from "dayjs";
 import { useRef, useState } from "react";
-import { WeatherDetailsToDaysForecastDay } from "./WeatherDetailsToDaysForecastDay";
+import { WeatherDetailsToDaysForecastDay } from "./weather-details-to-days-forecast-day";
 
 interface WeatherDetailsToDaysForecastProps {
   data: RequestForecastReturnResponse;

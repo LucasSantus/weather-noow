@@ -2,7 +2,7 @@
 
 import { RequestDetailsReturnResponse } from "@/app/api/weather/details/types/return";
 import { Droplet, Eye, SunMedium, Thermometer, Wind } from "lucide-react";
-import { WeatherDetailsToDayInfo } from "./WeatherDetailsToDayInfo";
+import { WeatherDetailsToDayInfo } from "./weather-details-to-day-info";
 
 interface WeatherDetailsToDayProps {
   data: RequestDetailsReturnResponse;
