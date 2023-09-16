@@ -1,5 +1,6 @@
 "use client";
 
+import { RequestCitiesReturnResponse } from "@/app/api/weather/cities/types/return";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Form,
@@ -10,34 +11,19 @@ import {
 } from "@/components/ui/form";
 import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
 import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
+import { SearchFormData, searchFormSchema } from "@/validation/search";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Framing } from "./framing";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { Skeleton } from "./ui/skeleton";
 
 interface SearchFormProps {}
-
-export const searchFormSchema = z.object({
-  search: z.string({
-    required_error: "Please enter a search term.",
-  }),
-});
-
-export type SearchFormData = z.infer<typeof searchFormSchema>;
-
-interface City {
-  locationKey: string;
-  cityName: string;
-  stateName: string;
-  countryName: string;
-}
 
 export function SearchForm({}: SearchFormProps) {
   const form = useForm<SearchFormData>({
@@ -58,7 +44,10 @@ export function SearchForm({}: SearchFormProps) {
       return fetch(process.env.NEXT_PUBLIC_API_URL + "/api/weather/cities", {
         method: "POST",
         body: JSON.stringify(values),
-      }).then(async (response) => (await response.json()) as City[]);
+      }).then(
+        async (response) =>
+          (await response.json()) as RequestCitiesReturnResponse,
+      );
     },
   });
 
