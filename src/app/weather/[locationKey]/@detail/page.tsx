@@ -1,6 +1,6 @@
 import { RequestDetailsReturnResponse } from "@/app/api/weather/details/types/return";
 import { CardCover } from "@/components/card-cover";
-import { WeatherDetailsToDay } from "./components/WeatherDetailsToDay";
+import { WeatherDetailsToDay } from "./components/weather-details-to-day";
 
 interface DetailProps {
   params: {
