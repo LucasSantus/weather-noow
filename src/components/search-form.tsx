@@ -65,7 +65,7 @@ export function SearchForm({}: SearchFormProps) {
                 {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
                 className="text-3xl"
               >
-                <span className="text-custom-gray-100">Boas vindas ao</span>
+                <span className="text-custom-gray-100">Boas vindas ao </span>
                 <span className="text-custom-blue-light-100">Weather Noow</span>
               </Framing>
 
