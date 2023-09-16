@@ -1,6 +1,6 @@
 import { RequestForecastReturnResponse } from "@/app/api/weather/forecast/types/return";
 import { CardCover } from "@/components/card-cover";
-import { WeatherDetailsToDaysForecast } from "./components/WeatherDetailsToDaysForecast";
+import { WeatherDetailsToDaysForecast } from "./components/weather-details-to-days-forecast";
 
 interface ForecastsProps {
   params: {

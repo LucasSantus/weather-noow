@@ -1,12 +1,14 @@
 import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import "@/styles/styles.css";
-import dayjs from "dayjs";
-import "dayjs/locale/pt-br";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import { NoScript } from "./no-script";
 import { Providers } from "./providers";
+
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+
 dayjs.locale("pt-br");
 
 const nunito = Nunito({
