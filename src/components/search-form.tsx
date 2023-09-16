@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { RequestCitiesReturnResponse } from "@/app/api/weather/cities/types/return";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,13 +11,13 @@ import {
 } from "@/components/ui/form";
 import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
 import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
+import { SearchFormData, searchFormSchema } from "@/validation/search";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Framing } from "./framing";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
@@ -24,28 +25,11 @@ import { Skeleton } from "./ui/skeleton";
 
 interface SearchFormProps {}
 
-export const searchFormSchema = z.object({
-  search: z.string({
-    required_error: "Please enter a search term.",
-  }),
-});
-
-export type SearchFormData = z.infer<typeof searchFormSchema>;
-
-interface City {
-  locationKey: string;
-  cityName: string;
-  stateName: string;
-  countryName: string;
-}
-
 export function SearchForm({}: SearchFormProps) {
-  const { push } = useRouter();
-
   const form = useForm<SearchFormData>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
-      search: "Três Corações",
+      search: "",
     },
   });
 
@@ -57,10 +41,13 @@ export function SearchForm({}: SearchFormProps) {
     mutate,
   } = useMutation({
     mutationFn: (values: SearchFormData) => {
-      return fetch("/api/weather/cities", {
+      return fetch(process.env.NEXT_PUBLIC_API_URL + "/api/weather/cities", {
         method: "POST",
         body: JSON.stringify(values),
-      }).then(async (response) => (await response.json()) as City[]);
+      }).then(
+        async (response) =>
+          (await response.json()) as RequestCitiesReturnResponse,
+      );
     },
   });
 
@@ -78,8 +65,8 @@ export function SearchForm({}: SearchFormProps) {
                 {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
                 className="text-3xl"
               >
-                <span className="text-custom-gray-100">Boas vindas ao </span>
-                <span className="text-custom-blue-light-100">Weather Now</span>
+                <span className="text-custom-gray-100">Boas vindas ao</span>
+                <span className="text-custom-blue-light-100">Weather Noow</span>
               </Framing>
 
               <Framing
@@ -148,14 +135,16 @@ export function SearchForm({}: SearchFormProps) {
                                 delay: 1.4 * time,
                               })}
                             >
-                              <Button
-                                className="flex w-full items-start justify-start"
-                                onClick={() => push("/weather/" + locationKey)}
-                                variant="outline"
-                                aria-label={cityDescription}
+                              <Link
+                                href={"/weather/" + locationKey}
+                                className={buttonVariants({
+                                  className:
+                                    "flex w-full items-start justify-start",
+                                  variant: "outline",
+                                })}
                               >
                                 {cityDescription}
-                              </Button>
+                              </Link>
                             </Framing>
                           );
                         },

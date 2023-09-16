@@ -10,7 +10,9 @@ interface WeatherProps {
 
 async function getData({ locationKey }: { locationKey: string }) {
   const response = await fetch(
-    "http://localhost:3000/api/weather/one-day?locationKey=" + locationKey,
+    process.env.NEXT_PUBLIC_API_URL +
+      "/api/weather/one-day?locationKey=" +
+      locationKey,
     {
       method: "GET",
     },

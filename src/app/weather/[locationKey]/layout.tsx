@@ -1,4 +1,5 @@
 import { WeatherLayout } from "@/components/weather-layout";
+import { Metadata } from "next";
 import { ReactNode } from "react";
 
 interface WeatherLayoutProps {
@@ -6,6 +7,10 @@ interface WeatherLayoutProps {
   detail: ReactNode;
   forecasts: ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Weather Noow | Detalhes",
+};
 
 export default function Layout({
   children,

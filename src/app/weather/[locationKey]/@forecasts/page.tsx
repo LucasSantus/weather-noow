@@ -10,7 +10,9 @@ interface ForecastsProps {
 
 async function getData({ locationKey }: { locationKey: string }) {
   return await fetch(
-    "http://localhost:3000/api/weather/forecast?locationKey=" + locationKey,
+    process.env.NEXT_PUBLIC_API_URL +
+      "/api/weather/forecast?locationKey=" +
+      locationKey,
     {
       method: "GET",
     },
