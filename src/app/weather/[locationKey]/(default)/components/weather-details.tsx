@@ -21,6 +21,7 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
           alt="sun"
           quality={100}
           fill
+          priority
           sizes="100vw"
           style={{
             objectFit: "cover",

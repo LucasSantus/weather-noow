@@ -3,9 +3,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function Loading() {
   return (
-    <CardCoverLoading className="row-span-1flex col-span-1 flex-col items-center gap-4">
+    <CardCoverLoading className="col-span-1 row-span-1 flex flex-col items-center gap-4">
       <Skeleton className="h-8 w-full" />
-      <div className="grid h-full w-full flex-1 grid-rows-5 gap-4">
+      <div className="grid h-full w-full grid-rows-5 gap-4">
         <Skeleton className="h-full" />
         <Skeleton className="h-full" />
         <Skeleton className="h-full" />
