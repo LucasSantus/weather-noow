@@ -60,7 +60,7 @@ export function WeatherDetailsToDaysForecast({
 
   return (
     <div
-      className="flex h-full w-full flex-nowrap gap-4 overflow-x-auto py-4 pb-8 text-center"
+      className="flex h-full w-full flex-col flex-nowrap gap-4 overflow-x-auto py-4 pb-8 text-center sm:grid sm:grid-cols-2 md:flex md:flex-row"
       ref={containerRef}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
@@ -80,8 +80,8 @@ export function WeatherDetailsToDaysForecast({
             day={textToDate}
             icon={convertNumberToIcon(currentTime?.weatherIcon ?? 0)}
             description={currentTime?.description ?? ""}
-            maxTemperature={Number(tempMax.toFixed(0))}
-            minTemperature={Number(tempMin.toFixed(0))}
+            maxTemperature={Number(tempMax?.toFixed(0))}
+            minTemperature={Number(tempMin?.toFixed(0))}
             animation={{
               delay,
             }}

@@ -24,17 +24,17 @@ export function WeatherDetailsToDaysForecastDay({
   return (
     <Framing
       {...bounceAnimationVerticalDislocate({ ...animation })}
-      className="flex h-full w-full flex-col justify-evenly rounded-lg border"
+      className="flex h-full w-full min-w-[150px] cursor-pointer select-none flex-col justify-evenly gap-2 rounded-lg border py-5 md:cursor-default md:select-auto md:gap-0 md:py-0"
     >
       <span className="text-lg font-bold capitalize text-custom-gray-200">
         {day}
       </span>
 
       <div className="flex justify-center">
-        <Icon className="flex items-center justify-center stroke-1 lg:h-14 lg:w-14 xl:h-20 xl:w-20" />
+        <Icon className="flex h-12 w-12 items-center justify-center stroke-1 lg:h-14 lg:w-14 xl:h-20 xl:w-20" />
       </div>
 
-      <span className="text-sm font-medium text-custom-gray-200">
+      <span className="px-4 text-sm font-medium text-custom-gray-200">
         {description}
       </span>
 

@@ -19,9 +19,9 @@ export function WeatherDetailsToDayInfo({
   return (
     <Framing
       {...bounceAnimationHorizontalDislocate({ ...animation })}
-      className="flex h-full w-full flex-col items-center justify-center py-4 xs:flex-row xs:justify-between sm:py-2"
+      className="flex h-full w-full flex-col items-center justify-center gap-1 py-2 sm:flex-row sm:justify-between"
     >
-      <div className="flex items-center justify-start gap-5">
+      <div className="flex flex-col items-center justify-start gap-1 sm:flex-row sm:gap-5">
         <Icon className="h-9 w-9 stroke-custom-gray-500" />
         <span className="text-md font-bold text-custom-gray-200">{title}</span>
       </div>
