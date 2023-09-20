@@ -1,12 +1,12 @@
 <h1 align="center">Weather Now</h1>
 
-<!-- <h6 align="center">
+<h6 align="center">
 	If you want to view the system, click on <a href="https://weather-now.vercel.app/">here</a>.
 </h6>
 
 <h6 align="center">
   If you want to view the staging system, click on <a href="https://weather-now-staging.vercel.app/">here</a>.
-</h6> -->
+</h6>
 
 <h3 id="about">:information_source: About</h3>
 
