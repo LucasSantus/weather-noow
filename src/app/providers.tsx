@@ -14,7 +14,7 @@ export function Providers({ children }: { children: ReactNode }) {
     () =>
       new QueryClient({
         defaultOptions: {
-          queries: { refetchOnWindowFocus: false, suspense: true },
+          queries: { refetchOnWindowFocus: false },
         },
       }),
   );
