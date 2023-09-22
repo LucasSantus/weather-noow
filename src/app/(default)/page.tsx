@@ -1,5 +1,5 @@
-import { SearchForm } from "@/components/search-form";
 import { WeatherLayout } from "@/components/weather-layout";
+import { SearchForm } from "./components/search-form";
 
 export default function Home() {
   return (

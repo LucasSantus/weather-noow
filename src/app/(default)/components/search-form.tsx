@@ -1,6 +1,7 @@
 "use client";
 
 import { RequestCitiesReturnResponse } from "@/app/api/weather/cities/types/return";
+import { Framing } from "@/components/framing";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Form,
@@ -9,26 +10,24 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { bounceAnimationHorizontalDislocate } from "@/utils/animation/bounceAnimationHorizontalDislocate";
 import { bounceAnimationVerticalDislocate } from "@/utils/animation/bounceAnimationVerticalDislocate";
 import { SearchFormData, searchFormSchema } from "@/validation/search";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { Framing } from "./framing";
-import { Input } from "./ui/input";
-import { ScrollArea } from "./ui/scroll-area";
-import { Skeleton } from "./ui/skeleton";
+import { toast } from "react-toastify";
 
 interface SearchFormProps {}
 
 export function SearchForm({}: SearchFormProps) {
-  const { push } = useRouter();
-
   const form = useForm<SearchFormData>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
@@ -41,21 +40,34 @@ export function SearchForm({}: SearchFormProps) {
   const {
     data: cities = [],
     isLoading,
-    mutate,
+    mutateAsync,
   } = useMutation({
-    mutationFn: (values: SearchFormData) => {
-      return fetch(process.env.NEXT_PUBLIC_API_URL + "/api/weather/cities", {
-        method: "POST",
-        body: JSON.stringify(values),
-      }).then(
-        async (response) =>
-          (await response.json()) as RequestCitiesReturnResponse,
-      );
+    mutationKey: ["cities"],
+    mutationFn: async (values: SearchFormData) => {
+      const response = await axios
+        .post<RequestCitiesReturnResponse>("/api/weather/cities", {
+          params: values,
+        })
+        .then(({ data }) => {
+          if (data.length === 0) {
+            toast.error("Não foram encontradas cidades com esse nome.");
+          }
+
+          return data;
+        })
+        .catch((error) => {
+          if (error.response.data.error.message)
+            toast.error(error.response.data.error.message);
+
+          return [] as RequestCitiesReturnResponse;
+        });
+
+      return response;
     },
   });
 
   async function onSubmit({ search }: SearchFormData) {
-    mutate({ search });
+    mutateAsync({ search });
   }
 
   return (
