@@ -4,40 +4,42 @@ import { RequestCitiesResponse } from "./types/cities";
 import { RequestCitiesReturnResponse } from "./types/return";
 
 export async function POST(request: Request) {
-  const { search } = await request.json();
+  const { params } = await request.json();
+  const { search } = params;
 
   if (!search) {
     return NextResponse.json(
-      { message: "Insira o campo [search] para fazer a busca" },
+      { message: "Insira a cidade que deseja pesquisar" },
       { status: 400 },
     );
   }
 
-  const params = {
-    q: search,
-    language: "pt-br",
-    apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
-  };
+  try {
+    const paramsCities = {
+      q: search,
+      language: "pt-br",
+      apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
+    };
 
-  const { data } = await axios.get<RequestCitiesResponse>(
-    "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
-    { params },
-  );
+    const { data } = await axios.get<RequestCitiesResponse>(
+      "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
+      { params: paramsCities },
+    );
 
-  const response: RequestCitiesReturnResponse = data.map(
-    ({ Key, LocalizedName, AdministrativeArea, Country }) => ({
-      locationKey: Key,
-      cityName: LocalizedName,
-      stateName: AdministrativeArea.LocalizedName,
-      countryName: Country.LocalizedName,
-    }),
-  );
+    const response: RequestCitiesReturnResponse = data.map(
+      ({ Key, LocalizedName, AdministrativeArea, Country }) => ({
+        locationKey: Key,
+        cityName: LocalizedName,
+        stateName: AdministrativeArea.LocalizedName,
+        countryName: Country.LocalizedName,
+      }),
+    );
 
-  return NextResponse.json(response);
-  // } catch (error) {
-  //   return NextResponse.json(
-  //     { message: "Erro ao fazer as requisições" + error },
-  //     { status: 500 },
-  //   );
-  // }
+    return NextResponse.json(response);
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Ocorreu uma falha ao processar os dados" },
+      { status: 500 },
+    );
+  }
 }
