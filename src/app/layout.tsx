@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import "@/styles/styles.css";
 import type { Metadata } from "next";
@@ -32,7 +31,6 @@ export default function RootLayout({
       <body className="h-screen dark:bg-custom-gray-800">
         <Providers>
           <NoScript />
-          <Toaster />
           {children}
         </Providers>
       </body>

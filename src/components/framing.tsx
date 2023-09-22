@@ -10,7 +10,7 @@ export function Framing({ children, presence = true, ...rest }: FramingProps) {
   if (!presence) return <motion.div {...rest}>{children}</motion.div>;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait" presenceAffectsLayout>
       <motion.div {...rest}>{children}</motion.div>
     </AnimatePresence>
   );
