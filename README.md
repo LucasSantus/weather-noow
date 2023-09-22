@@ -1,12 +1,12 @@
 <h1 align="center">Weather Now</h1>
 
-<!-- <h6 align="center">
-	If you want to view the system, click on <a href="https://weather-now.vercel.app/">here</a>.
+<h6 align="center">
+	If you want to view the system, click on <a href="https://weather-noow.vercel.app/">here</a>.
 </h6>
 
 <h6 align="center">
-  If you want to view the staging system, click on <a href="https://weather-now-staging.vercel.app/">here</a>.
-</h6> -->
+  If you want to view the staging system, click on <a href="https://weather-noow-staging.vercel.app/">here</a>.
+</h6>
 
 <h3 id="about">:information_source: About</h3>
 
@@ -39,23 +39,29 @@ This is a totally free project!
 
 Used tools:
 
-- [NextJS v13.4.4](https://nextjs.org/)
+- [NextJS v13.4.13](https://nextjs.org/)
 - [Next Themes v0.2.1](https://github.com/pacocoursey/next-themes)
-- [CLSX v1.2.1](https://www.npmjs.com/package/clsx)
+- [CLSX v2.0.0](https://www.npmjs.com/package/clsx)
 - [Eslint v8.42.0](https://github.com/eslint/eslint)
-- [Lucide React v0.240.0](https://lucide.dev/)
+- [Lucide React v0.263.1](https://lucide.dev/)
 - [Prettier v2.8.8](https://prettier.io/)
 - [React v18.2.0](https://pt-br.reactjs.org/)
 - [TypeScript v5.1.3](https://www.typescriptlang.org/)
 - [TailwindCSS v3.3.2](https://tailwindcss.com/docs/installation)
-- [Framer Motion v10.12.16](https://www.npmjs.com/package/framer-motion)
-- [Tanstack Query v4.29.12](https://tanstack.com/query/latest)
+- [Framer Motion v10.16.2](https://www.npmjs.com/package/framer-motion)
+- [Radix UI](https://www.radix-ui.com/)
+- [DayJS v1.11.9](https://day.js.org/)
+- [React Hook Form v7.45.4](https://react-hook-form.com/)
+- [Zod v3.22.2](https://github.com/colinhacks/zod)
+- [Axios v1.4.0](https://axios-http.com/ptbr/docs/intro)
 
 ---
 
 <h3 id="funcionalidades">:sparkles: Features</h3>
 
 - [x] Dark mode.
+- [x] Search cities
+- [x] Weather details
 
 ---
 
