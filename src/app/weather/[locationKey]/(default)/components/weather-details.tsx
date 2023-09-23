@@ -1,6 +1,5 @@
 import { RequestOneDayReturnResponse } from "@/app/api/weather/one-day/types/return";
 import { CurrentClock } from "@/components/current-clock";
-import { Separator } from "@/components/ui/separator";
 import { convertNumberToIcon } from "@/utils/convertNumberToIcon";
 import { formatImagePerHour } from "@/utils/formatImagePerHour";
 import dayjs from "dayjs";
@@ -15,7 +14,7 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
   const Icon = convertNumberToIcon(data.weatherIcon);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full text-custom-gray-100">
       <div className="hidden md:absolute md:inset-0 md:block">
         <Image
           src={formatImagePerHour()}
@@ -53,9 +52,7 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
             </span>
             <div className="flex flex-col-reverse justify-center gap-1 text-xl 2xl:flex-row">
               <span className="flex justify-center gap-1 md:justify-start">
-                {Math.floor(data.tempMin)}ºc{" "}
-                <Separator orientation="vertical" />
-                {Math.floor(data.tempMax)}ºc
+                {Math.floor(data.tempMin)}ºc - {Math.floor(data.tempMax)}ºc
                 <span className="hidden 2xl:block"> - </span>
               </span>
 
