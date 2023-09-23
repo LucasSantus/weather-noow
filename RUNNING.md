@@ -5,11 +5,11 @@
 <h4><strong>Cloning project</strong></h4>
 
 ```
-git clone git@github.com:LucasSantus/weather-now.git
+git clone git@github.com:LucasSantus/weather-noow.git
 ```
 
 ```
-cd weather-now
+cd weather-noow
 ```
 
 <h4><strong>Installing dependencies & running</strong></h4>
