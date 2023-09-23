@@ -20,7 +20,7 @@ export default function Layout({
   return (
     <WeatherLayout
       header={{
-        className: "!bg-custom-gray-700",
+        className: "!dark:bg-custom-gray-700 shadow-md",
       }}
     >
       <div className="grid h-full grid-rows-2 gap-4 md:grid-flow-col md:grid-cols-2">

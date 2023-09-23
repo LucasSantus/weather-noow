@@ -28,9 +28,8 @@ export function ToggleMode() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
           size="icon"
-          className="bg-secondary-foreground text-white hover:text-white dark:bg-background"
+          className="text-white hover:text-white dark:border dark:border-custom-gray-400/20 dark:bg-custom-gray-500"
           aria-label="Toggle theme"
         >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

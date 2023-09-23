@@ -78,15 +78,17 @@ export function SearchForm({}: SearchFormProps) {
             <div className="text-center">
               <Framing
                 {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
-                className="text-3xl"
+                className="text-3xl font-semibold"
               >
-                <span className="text-custom-gray-100">Boas vindas ao </span>
+                <span className="text-black/70 dark:text-custom-gray-100">
+                  Boas vindas ao{" "}
+                </span>
                 <span className="text-custom-blue-light-100">Weather Noow</span>
               </Framing>
 
               <Framing
                 {...bounceAnimationVerticalDislocate({ delay: 0.6 })}
-                className="text-xl text-custom-gray-200"
+                className="text-xl text-black/60 dark:text-custom-gray-200"
               >
                 Escolha um local para ver a previsão do tempo
               </Framing>
@@ -104,6 +106,7 @@ export function SearchForm({}: SearchFormProps) {
                       <Input
                         placeholder="Pesquisar..."
                         className="w-full flex-auto xs:w-[300px] md:w-[500px]"
+                        autoComplete="off"
                         {...field}
                       />
                     </FormControl>
@@ -132,7 +135,7 @@ export function SearchForm({}: SearchFormProps) {
             ) : (
               <Fragment>
                 {cities.length > 0 && (
-                  <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border p-4">
+                  <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border bg-custom-gray-200/30 p-4">
                     <div className="grid w-full gap-3">
                       {cities.map(
                         (
@@ -140,7 +143,6 @@ export function SearchForm({}: SearchFormProps) {
                           index,
                         ) => {
                           const time = index * 0.1;
-
                           const cityDescription = `${cityName}, ${stateName}, ${countryName}`;
 
                           return (
@@ -154,7 +156,7 @@ export function SearchForm({}: SearchFormProps) {
                                 href={"/weather/" + locationKey}
                                 className={buttonVariants({
                                   className:
-                                    "flex w-full items-start justify-start",
+                                    "flex w-full items-start justify-start bg-custom-gray-100/50 text-custom-gray-400 !opacity-80 hover:border-custom-gray-200/50  hover:opacity-60 dark:border dark:border-custom-gray-200/30 dark:border-gray-600 dark:text-custom-gray-100",
                                   variant: "outline",
                                 })}
                               >
