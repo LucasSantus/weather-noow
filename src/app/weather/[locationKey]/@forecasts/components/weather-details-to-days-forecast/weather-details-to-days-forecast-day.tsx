@@ -24,30 +24,30 @@ export function WeatherDetailsToDaysForecastDay({
   return (
     <Framing
       {...bounceAnimationVerticalDislocate({ ...animation })}
-      className="flex h-full w-full min-w-[150px] cursor-pointer select-none flex-col justify-evenly gap-2 rounded-lg border py-5 md:cursor-default md:select-auto md:gap-0 md:py-0"
+      className="flex h-full w-full min-w-[150px] cursor-pointer select-none flex-col justify-evenly gap-2 rounded-lg border border-custom-gray-400 bg-primary py-5 dark:border-custom-gray-500 dark:bg-transparent md:cursor-default md:select-auto md:gap-0 md:py-0"
     >
-      <span className="text-lg font-bold capitalize text-custom-gray-200">
+      <span className="text-lg font-bold capitalize text-white dark:text-custom-gray-200">
         {day}
       </span>
 
       <div className="flex justify-center">
-        <Icon className="flex h-12 w-12 items-center justify-center stroke-1 lg:h-14 lg:w-14 xl:h-20 xl:w-20" />
+        <Icon className="flex h-12 w-12 items-center justify-center stroke-white stroke-1 lg:h-14 lg:w-14 xl:h-20 xl:w-20" />
       </div>
 
-      <span className="px-4 text-sm font-medium text-custom-gray-200">
+      <span className="px-4 text-sm font-medium text-white dark:text-custom-gray-200">
         {description}
       </span>
 
       <div className="grid gap-2">
         <div className="flex flex-col-reverse justify-center xl:flex-row xl:gap-4">
-          <span className="text-lg font-bold text-custom-gray-100">
+          <span className="text-lg font-bold text-white/50 dark:text-custom-gray-100">
             {minTemperature} ºc
           </span>
           <div className="flex justify-center xl:hidden">
             <Separator className="w-5" />
           </div>
 
-          <span className="text-lg font-bold text-custom-gray-400">
+          <span className="text-lg font-bold text-white dark:text-custom-gray-400">
             {maxTemperature} ºc
           </span>
         </div>
