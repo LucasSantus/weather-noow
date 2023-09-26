@@ -20,7 +20,7 @@ _"Create a simple project related to weather and climate(weather). With the goal
 <h3 id="status">:heavy_exclamation_mark: Status</h3>
 
 <h4 align="center">
-	:construction: Project in construction... :construction:
+ ✔️ Finished project ✔️
 </h4>
 
 ---
