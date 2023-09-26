@@ -56,7 +56,7 @@ export function SearchForm({}: SearchFormProps) {
           return data;
         })
         .catch((error) => {
-          if (error.response.data.error.message)
+          if (!!error.response.data.error.message)
             toast.error(error.response.data.error.message);
 
           return [] as RequestCitiesReturnResponse;
@@ -77,7 +77,7 @@ export function SearchForm({}: SearchFormProps) {
           <div className="grid gap-2">
             <div className="text-center">
               <Framing
-                {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
+                {...bounceAnimationVerticalDislocate({ delay: 0.6 })}
                 className="text-3xl font-semibold"
               >
                 <span className="text-custom-gray-100">Boas vindas ao </span>
@@ -85,14 +85,14 @@ export function SearchForm({}: SearchFormProps) {
               </Framing>
 
               <Framing
-                {...bounceAnimationVerticalDislocate({ delay: 0.6 })}
+                {...bounceAnimationVerticalDislocate({ delay: 0.8 })}
                 className="text-xl text-custom-gray-200"
               >
                 Escolha um local para ver a previsão do tempo
               </Framing>
             </div>
             <Framing
-              {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
+              {...bounceAnimationVerticalDislocate({ delay: 1 })}
               className="grid justify-center gap-2 sm:flex"
             >
               <FormField
