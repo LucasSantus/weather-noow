@@ -14,7 +14,7 @@ export function WeatherDetails({ data }: WeatherDetailsProps) {
   const Icon = convertNumberToIcon(data.weatherIcon);
 
   return (
-    <div className="relative h-full w-full text-custom-gray-100">
+    <div className="relative h-full w-full rounded-lg border border-custom-gray-500 text-custom-gray-100">
       <div className="hidden md:absolute md:inset-0 md:block">
         <Image
           src={formatImagePerHour()}
