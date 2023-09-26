@@ -71,7 +71,7 @@ export function SearchForm({}: SearchFormProps) {
   }
 
   return (
-    <div className="w-full">
+    <div className="mt-7 w-full sm:mt-12">
       <Form {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="grid gap-2">
@@ -80,22 +80,20 @@ export function SearchForm({}: SearchFormProps) {
                 {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
                 className="text-3xl font-semibold"
               >
-                <span className="text-black/70 dark:text-custom-gray-100">
-                  Boas vindas ao{" "}
-                </span>
+                <span className="text-custom-gray-100">Boas vindas ao </span>
                 <span className="text-custom-blue-light-100">Weather Noow</span>
               </Framing>
 
               <Framing
                 {...bounceAnimationVerticalDislocate({ delay: 0.6 })}
-                className="text-xl text-black/60 dark:text-custom-gray-200"
+                className="text-xl text-custom-gray-200"
               >
                 Escolha um local para ver a previsão do tempo
               </Framing>
             </div>
             <Framing
               {...bounceAnimationVerticalDislocate({ delay: 0.4 })}
-              className="grid gap-2 sm:flex"
+              className="grid justify-center gap-2 sm:flex"
             >
               <FormField
                 control={control}
@@ -105,7 +103,7 @@ export function SearchForm({}: SearchFormProps) {
                     <FormControl>
                       <Input
                         placeholder="Pesquisar..."
-                        className="w-full flex-auto xs:w-[300px] md:w-[500px]"
+                        className="w-full xs:w-[300px] sm:w-[430px] md:w-[500px]"
                         autoComplete="off"
                         {...field}
                       />
@@ -117,7 +115,7 @@ export function SearchForm({}: SearchFormProps) {
 
               <Button
                 type="submit"
-                className="h-14 sm:w-14"
+                className="h-14 xs:w-[300px] sm:w-14"
                 icon={<Search />}
                 isLoading={isLoading}
                 disabled={isLoading}
@@ -135,7 +133,7 @@ export function SearchForm({}: SearchFormProps) {
             ) : (
               <Fragment>
                 {cities.length > 0 && (
-                  <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border bg-custom-gray-200/30 p-4">
+                  <ScrollArea className="h-full max-h-[36rem] w-full rounded-md border bg-custom-gray-600 p-4 shadow-sm">
                     <div className="grid w-full gap-3">
                       {cities.map(
                         (
@@ -156,7 +154,7 @@ export function SearchForm({}: SearchFormProps) {
                                 href={"/weather/" + locationKey}
                                 className={buttonVariants({
                                   className:
-                                    "flex w-full items-start justify-start bg-custom-gray-100/50 text-custom-gray-400 !opacity-80 hover:border-custom-gray-200/50  hover:opacity-60 dark:border dark:border-custom-gray-200/30 dark:border-gray-600 dark:text-custom-gray-100",
+                                    "flex w-full items-start justify-start border-none bg-custom-gray-500 !opacity-80 hover:bg-custom-gray-500/50 hover:opacity-60",
                                   variant: "outline",
                                 })}
                               >

@@ -18,11 +18,7 @@ export default function Layout({
   forecasts,
 }: WeatherLayoutProps) {
   return (
-    <WeatherLayout
-      header={{
-        className: "!dark:bg-custom-gray-700 shadow-md",
-      }}
-    >
+    <WeatherLayout>
       <div className="grid h-full grid-rows-2 gap-4 md:grid-flow-col md:grid-cols-2">
         {children}
         {detail}
