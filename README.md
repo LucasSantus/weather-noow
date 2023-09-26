@@ -61,7 +61,6 @@ Used tools:
 
 <h3 id="funcionalidades">:sparkles: Features</h3>
 
-- [x] Dark mode.
 - [x] Search cities
 - [x] Weather details
 
