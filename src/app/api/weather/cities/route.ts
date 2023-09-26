@@ -1,7 +1,17 @@
-import axios from "axios";
+import { server } from "@/lib/axios";
 import { NextResponse } from "next/server";
 import { RequestCitiesResponse } from "./types/cities";
 import { RequestCitiesReturnResponse } from "./types/return";
+
+// Interface para representar a estrutura do objeto de erro
+interface ErrorResponse {
+  response?: {
+    data?: {
+      Code?: string;
+      Message?: string;
+    };
+  };
+}
 
 export async function POST(request: Request) {
   const { params } = await request.json();
@@ -9,7 +19,11 @@ export async function POST(request: Request) {
 
   if (!search) {
     return NextResponse.json(
-      { message: "Insira a cidade que deseja pesquisar" },
+      {
+        error: {
+          message: "Insira a cidade que deseja pesquisar",
+        },
+      },
       { status: 400 },
     );
   }
@@ -21,8 +35,8 @@ export async function POST(request: Request) {
       apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
     };
 
-    const { data } = await axios.get<RequestCitiesResponse>(
-      "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
+    const { data } = await server.get<RequestCitiesResponse>(
+      "/locations/v1/cities/autocomplete",
       { params: paramsCities },
     );
 
@@ -37,8 +51,26 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error) {
+    const errorTyped = error as ErrorResponse;
+
+    if (errorTyped?.response?.data?.Code === "ServiceUnavailable") {
+      return NextResponse.json(
+        {
+          error: {
+            message:
+              "Ocorreu um erro, quantidade diária de buscas foram excedidas!",
+          },
+        },
+        { status: 403 },
+      );
+    }
+
     return NextResponse.json(
-      { message: "Ocorreu uma falha ao processar os dados" },
+      {
+        error: {
+          message: "Ocorreu uma falha ao processar os dados!",
+        },
+      },
       { status: 500 },
     );
   }

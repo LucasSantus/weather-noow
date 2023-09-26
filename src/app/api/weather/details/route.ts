@@ -1,4 +1,4 @@
-import axios from "axios";
+import { server } from "@/lib/axios";
 import { NextRequest, NextResponse } from "next/server";
 import { RequestCurrentResponse } from "./types/current";
 import { RequestDetailsReturnResponse } from "./types/return";
@@ -9,26 +9,14 @@ export async function GET(request: NextRequest) {
   if (!locationKey) {
     return NextResponse.json(
       {
-        message:
-          "Insira o parâmetro [locationKey] para fazer a busca dos dados",
+        error: {
+          message:
+            "Insira o parâmetro [locationKey] para fazer a busca dos dados",
+        },
       },
       { status: 400 },
     );
   }
-
-  // return new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     resolve(
-  //       NextResponse.json({
-  //         humidity: 42,
-  //         uvIndex: 5,
-  //         windSpeed: 22.0,
-  //         thermalSensation: 25.1,
-  //         visibility: 16.1,
-  //       }),
-  //     );
-  //   }, 3000);
-  // });
 
   const params = {
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
@@ -38,8 +26,8 @@ export async function GET(request: NextRequest) {
   };
 
   try {
-    const { data } = await axios.get<RequestCurrentResponse>(
-      "http://dataservice.accuweather.com/currentconditions/v1/" + locationKey,
+    const { data } = await server.get<RequestCurrentResponse>(
+      "/currentconditions/v1/" + locationKey,
       {
         params,
       },
@@ -56,7 +44,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(
-      { message: "Erro ao fazer as requisições" },
+      {
+        error: {
+          message: "Ocorreu uma falha ao buscar os dados!",
+        },
+      },
       { status: 500 },
     );
   }
