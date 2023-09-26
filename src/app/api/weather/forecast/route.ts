@@ -1,4 +1,4 @@
-import axios from "axios";
+import { server } from "@/lib/axios";
 import { NextRequest, NextResponse } from "next/server";
 import { RequestForecastResponse } from "./types/forecasts";
 import { RequestForecastReturnResponse } from "./types/return";
@@ -9,45 +9,14 @@ export async function GET(request: NextRequest) {
   if (!locationKey) {
     return NextResponse.json(
       {
-        message:
-          "Insira o parâmetro [locationKey] para fazer a busca dos dados",
+        error: {
+          message:
+            "Insira o parâmetro [locationKey] para fazer a busca dos dados",
+        },
       },
       { status: 400 },
     );
   }
-
-  // return new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     resolve(
-  //       NextResponse.json([
-  //         {
-  //           date: "2023-09-08T07:00:00-03:00",
-  //           tempMin: 13.2,
-  //           tempMax: 28.5,
-  //           weatherIcon: 3,
-  //         },
-  //         {
-  //           date: "2023-09-09T07:00:00-03:00",
-  //           tempMin: 12.7,
-  //           tempMax: 30.1,
-  //           weatherIcon: 6,
-  //         },
-  //         {
-  //           date: "2023-09-10T07:00:00-03:00",
-  //           tempMin: 13.4,
-  //           tempMax: 30.2,
-  //           weatherIcon: 4,
-  //         },
-  //         {
-  //           date: "2023-09-11T07:00:00-03:00",
-  //           tempMin: 13,
-  //           tempMax: 30.5,
-  //           weatherIcon: 1,
-  //         },
-  //       ]),
-  //     );
-  //   }, 3000);
-  // });
 
   const params = {
     apikey: process.env.NEXT_PUBLIC_API_ACCU_WEATHER,
@@ -57,9 +26,8 @@ export async function GET(request: NextRequest) {
   };
 
   try {
-    const { data } = await axios.get<RequestForecastResponse>(
-      "http://dataservice.accuweather.com/forecasts/v1/daily/5day/" +
-        locationKey,
+    const { data } = await server.get<RequestForecastResponse>(
+      "/forecasts/v1/daily/5day/" + locationKey,
       {
         params,
       },
@@ -84,7 +52,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(
-      { message: "Erro ao fazer as requisições" },
+      {
+        error: {
+          message: "Ocorreu uma falha ao buscar os dados!",
+        },
+      },
       { status: 500 },
     );
   }
