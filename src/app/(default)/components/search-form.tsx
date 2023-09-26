@@ -115,7 +115,7 @@ export function SearchForm({}: SearchFormProps) {
 
               <Button
                 type="submit"
-                className="h-14 xs:w-[300px] sm:w-14"
+                className="h-14 bg-custom-blue-light-100 opacity-90 xs:w-[300px] sm:w-14"
                 icon={<Search />}
                 isLoading={isLoading}
                 disabled={isLoading}
