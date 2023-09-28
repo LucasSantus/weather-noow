@@ -40,7 +40,6 @@ This is a totally free project!
 Used tools:
 
 - [NextJS v13.4.13](https://nextjs.org/)
-- [Next Themes v0.2.1](https://github.com/pacocoursey/next-themes)
 - [CLSX v2.0.0](https://www.npmjs.com/package/clsx)
 - [Eslint v8.42.0](https://github.com/eslint/eslint)
 - [Lucide React v0.263.1](https://lucide.dev/)
