@@ -1,7 +1,7 @@
 <h1 align="center">Weather Now</h1>
 
 <h6 align="center">
-	If you want to view the system, click on <a href="https://weather-noow.vercel.app/">here</a>.
+  If you want to view the system, click on <a href="https://weather-noow.vercel.app/">here</a>.
 </h6>
 
 <h6 align="center">
@@ -11,9 +11,10 @@
 <h3 id="about">:information_source: About</h3>
 
 > This project was developed using Nextjs, React, TypeScript, TailwindCSS.
+> <a href="https://developer.accuweather.com/">Accu Weather API</a>
 
 The idea is:
-_"Create a simple project related to weather and climate(weather). With the goal of building the application in order to enhance learning in NextJS, React, TypeScript and TailwindCSS."_
+_"Create a simple project related to weather and climate(weather) using api <a href="https://developer.accuweather.com/">accuweather</a>. With the goal of building the application in order to enhance learning in NextJS, React, TypeScript and TailwindCSS."_
 
 ---
 
@@ -54,7 +55,6 @@ Used tools:
 - [Zod v3.22.2](https://github.com/colinhacks/zod)
 - [Axios v1.4.0](https://axios-http.com/ptbr/docs/intro)
 - [React Toastify v9.1.3](https://fkhadra.github.io/react-toastify/introduction)
-
 
 ---
 
