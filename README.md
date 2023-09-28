@@ -11,10 +11,10 @@
 <h3 id="about">:information_source: About</h3>
 
 > This project was developed using Nextjs, React, TypeScript, TailwindCSS.
-> <a href="https://developer.accuweather.com/">Accu Weather API</a>
 
 The idea is:
-_"Create a simple project related to weather and climate(weather) using api <a href="https://developer.accuweather.com/">accuweather</a>. With the goal of building the application in order to enhance learning in NextJS, React, TypeScript and TailwindCSS."_
+
+_"Create a simple project related to weather and climate(weather) using <a href="https://developer.accuweather.com/">accuweather</a> api. With the goal of building the application in order to enhance learning in NextJS, React, TypeScript and TailwindCSS."_
 
 ---
 
